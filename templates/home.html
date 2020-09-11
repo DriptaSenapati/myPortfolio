@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dripta Senapati</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/logo-modified.png')}}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/home_style.css')}}"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    /> -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <noscript>
+      <style>
+        /**
+        * Reinstate scrolling for non-JS clients
+        */
+        .simplebar-content-wrapper {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          ><img
+            src="{{ url_for('static', filename='img/logo-modified.png')}}"
+            alt=""
+            style="width: 39px; width: 39px"
+          />
+          Dripta</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link about-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link resume-link" href="#">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link project-link" href="#">Accomplishments</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="home">
+      <div class="home_name">
+        <h1>DRIPTA SENAPATI</h1>
+        <p>
+          Data Scientist at
+          <a
+            href="http://www.objectsol.in/"
+            style="color: #c58cfb; text-decoration: none"
+            >Objectsol Technologies Pvt. Lmt.</a
+          >
+        </p>
+        <h1 class="home_animate_heading">
+          I'm a <span id="home_animate"></span>
+        </h1>
+      </div>
+      <div class="logos">
+        <ul>
+          <li>
+            <a href="https://www.linkedin.com/in/dripta-senapati-088b5b199/"
+              ><img
+                src="{{ url_for('static', filename='img/linkdn.png')}}"
+                alt="linkdn"
+            /></a>
+          </li>
+          <li>
+            <a href="https://github.com/DriptaSenapati"
+              ><img
+                src="{{ url_for('static', filename='img/github.png')}}"
+                alt="github"
+                class="git"
+            /></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="About" id="About">
+      <span style="font-size: 20px; color: white" class="about_cross"
+        >&#10006;</span
+      >
+      <div class="aboutContainer">
+        <h2>About Me</h2>
+        <div class="flex-container">
+          <img
+            src="{{ url_for('static', filename='img/aboutDP.jpg')}}"
+            class="rounded img-fluid"
+            alt="..."
+          />
+          <div class="about_data">
+            <p>
+              Passionate about Artificial Intelligence, Statistics, NLP and
+              Coding. Looking forward to establish a career as a Data Scientist
+              or a Data Analyst. I have great analytical and programming skills
+              besides having in-depth mathematical knowledge and sound knowledge
+              about Computer. Having the ability to solve complex statistical
+              problems and analyze the data within stipulated deadline.
+            </p>
+            <div
+              style="
+                height: 0.5px;
+                background: whitesmoke;
+                width: 70%;
+                margin: auto;
+              "
+            ></div>
+            <div class="grid-box">
+              <p class="item">Name: Dripta Senapati</p>
+              <p class="item">Age: <span id="age"></span></p>
+              <p class="item">
+                Email:
+                <a href="mailto:driptasenapati97@gmail.com" style="color: green"
+                  >driptasenapati97@gmail.com</a
+                >
+              </p>
+              <p class="item">
+                Linkdin Id:
+                <a
+                  href="https://www.linkedin.com/in/dripta-senapati-088b5b199/"
+                  style="color: green"
+                  >Dripta Senapati</a
+                >
+              </p>
+            </div>
+            <a href="{{ url_for('getpdf', filename='Dripta_Resume')}}">
+              <button type="button" class="btn btn-outline-success">
+                Download CV
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-content">
+        <div class="content-box">
+          <img
+            src="{{ url_for('static', filename='img/img.png')}}"
+            alt="comma"
+          />
+          <p>
+            Dripta is a gifted programmer and has a great ability for deductive
+            reasoning. I have worked with him on a couple of projects, both
+            directly and indirectly. He has great insights and a clear thought
+            process. I am yet to see him back out from a hurdle, which he never
+            does. He is a prompt team player and has a especial thirst for
+            everything Python!
+          </p>
+          <img
+            src="{{ url_for('static', filename='img/recom.jpg')}}"
+            alt="userimg"
+            class="rounded img-fluid recompic"
+          />
+          <h3>
+            <a
+              href="https://www.linkedin.com/in/debacharyaa/"
+              style="color: green; text-decoration: none"
+              >Debabrata Acharya</a
+            >
+          </h3>
+          <p>University Research Scholar | Software Developer</p>
+        </div>
+      </div>
+    </section>
+    <section class="resume">
+      <span style="font-size: 20px; color: white" class="about_cross"
+        >&#10006;</span
+      >
+      <div class="resumeContainer">
+        <h2 style="color: green; margin-bottom: 70px">My Resume</h2>
+        <div class="resumedata">
+          <ul>
+            <li>
+              <div class="li-item skills">
+                <h3 style="text-align: left; color: whitesmoke">
+                  Technical Skills
+                </h3>
+                <div class="skills-grid">
+                  <div class="skills-grid-items">
+                    <p>Python</p>
+                    <div class="progress_bar1" style="--width: 70"></div>
+                  </div>
+                  <div class="skills-grid-items">
+                    <p>SQL</p>
+                    <div class="progress_bar2" style="--width: 40"></div>
+                  </div>
+                  <div class="skills-grid-items">
+                    <p>Machine Learning and Analysis</p>
+                    <div class="progress_bar3" style="--width: 60"></div>
+                  </div>
+                  <div class="skills-grid-items">
+                    <p>R Programming</p>
+                    <div class="progress_bar4" style="--width: 30"></div>
+                  </div>
+                  <div class="skills-grid-items">
+                    <p>MS Excel</p>
+                    <div class="progress_bar5" style="--width: 40"></div>
+                  </div>
+                  <div class="skills-grid-items">
+                    <p>MS word</p>
+                    <div class="progress_bar6" style="--width: 70"></div>
+                  </div>
+                  <div class="skills-grid-items">
+                    <p>MS Powerpoint</p>
+                    <div class="progress_bar7" style="--width: 60"></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="li-items experience">
+                <h3 style="text-align: left; color: whitesmoke">
+                  Work Experience
+                </h3>
+                <div class="work_experience">
+                  <h4 class="pname" style="color: green">Data Scientist</h4>
+                  <p style="color: black; font-size: 20px">
+                    Objectsol Technologies Pvt. Ltd.
+                  </p>
+                  <p>Feb 2020 - present <span id="ex-number"></span></p>
+                  <p>Saltlake</p>
+                  <p class="JD" style="color: rgb(51, 90, 82); font-size: 19px">
+                    Job Description:
+                  </p>
+                  <p style="color: black">
+                    It is a software based company, successfuly building apps
+                    for <strong>Android</strong>,
+                    <strong>iOS</strong>,<strong>IpTV</strong>. I have to
+                    develop backend algoritm which are based on some
+                    mathematical models and some
+                    <strong>Machine Learning algoritm</strong>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="li-items eduaction">
+                <h3 style="text-align: left; color: whitesmoke">Education</h3>
+                <div class="timeline_eduction" style="color: white">
+                  <ul class="timeline">
+                    <li class="event" data-date="2018-2020">
+                      <h3>Post-graduation</h3>
+                      <p><span>Institute:</span>University of Kalyani</p>
+                      <p><span>Subject:</span>Statistics</p>
+                      <p>
+                        <span>Marks:</span>74% in 2nd Sem and 68% in 1st Sem
+                      </p>
+                    </li>
+                    <li class="event" data-date="2015-2018">
+                      <h3>Under Graduation</h3>
+                      <p><span>Institute:</span>University of Calcutta</p>
+                      <p><span>Subject:</span>Statistics</p>
+                      <p><span>College:</span>Asutosh College</p>
+                      <p><span>Marks:</span>70%</p>
+                    </li>
+                    <li class="event" data-date="2013-2015">
+                      <h3>Higher Secondary</h3>
+                      <p>
+                        <span>Institute:</span>Labanhrad Vidyapith. (Salt Lake
+                        AD)
+                      </p>
+                      <p><span>Subject:</span>Pure Science</p>
+                      <p><span>Marks:</span>87%</p>
+                    </li>
+                    <li class="event" data-date="2013">
+                      <h3>Secondary Education</h3>
+                      <p>
+                        <span>Institute:</span>The Scottish Church Collegiate
+                        School
+                      </p>
+                      <p><span>Marks:</span>83%</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="project">
+      <span style="font-size: 20px; color: white" class="about_cross"
+        >&#10006;</span
+      >
+      <div class="projectContainer" style="color: wheat">
+        <div class="container">
+          <h2 class="pb-3 pt-2 border-bottom mb-5">
+            List of my <strong>Accomplishments</strong>
+          </h2>
+          <!--first section-->
+          <div class="row align-items-center how-it-works d-flex">
+            <div
+              class="col-2 text-center bottom d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">1</div>
+            </div>
+            <div class="col-6">
+              <h5>ChatBot</h5>
+              <p>
+                Built a simple <strong>ChatBot</strong>, based on Python, that
+                can-do simple jobs like opening apps, playing music, telling
+                weather information, telling time etc. The project is at an
+                intermediate level as of now.
+              </p>
+            </div>
+          </div>
+          <!--path between 1-2-->
+          <div class="row timeline">
+            <div class="col-2">
+              <div class="corner top-right"></div>
+            </div>
+            <div class="col-8">
+              <hr />
+            </div>
+            <div class="col-2">
+              <div class="corner left-bottom"></div>
+            </div>
+          </div>
+          <!--second section-->
+          <div
+            class="row align-items-center justify-content-end how-it-works d-flex"
+          >
+            <div class="col-6 text-right">
+              <h5>Covdata Python Package</h5>
+              <p>
+                Created a <strong>python package</strong>on Covid-19 that can
+                retrieve all the numerical data related to the COVID-19 spread
+                in India. This package has the power of filtering the data for
+                user’s choice and can visualize the death, recovered and
+                confirmed cases.
+              </p>
+              <p>
+                PyPi Link:
+                <a
+                  href="https://pypi.org/project/covdata/"
+                  style="text-decoration: none; color: green"
+                  >https://pypi.org/project/covdata/</a
+                >
+              </p>
+            </div>
+            <div
+              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">2</div>
+            </div>
+          </div>
+          <!--path between 2-3-->
+          <div class="row timeline">
+            <div class="col-2">
+              <div class="corner right-bottom"></div>
+            </div>
+            <div class="col-8">
+              <hr />
+            </div>
+            <div class="col-2">
+              <div class="corner top-left"></div>
+            </div>
+          </div>
+          <!--third section-->
+          <div class="row align-items-center how-it-works d-flex ex">
+            <div
+              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">3</div>
+            </div>
+            <div class="col-6">
+              <h5>Covdata Server</h5>
+              <p>
+                Have built a website for COVID-19 in India that gives
+                flexibility to users to see the data for varying filters and
+                also some graphical analyses are also done in website.
+              </p>
+              <p>
+                Server Link:
+                <a
+                  href="https://covdata.pythonanywhere.com/"
+                  style="text-decoration: none; color: green"
+                  >https://covdata.pythonanywhere.com/</a
+                >
+              </p>
+              <p>
+                GitHub Link:
+                <a
+                  href="https://github.com/DriptaSenapati/covidindiaServer"
+                  style="text-decoration: none; color: green"
+                  >https://github.com/DriptaSenapati/covidindiaServer</a
+                >
+              </p>
+            </div>
+          </div>
+          <!-- path 3-4 -->
+          <div class="row timeline">
+            <div class="col-2">
+              <div class="corner top-right"></div>
+            </div>
+            <div class="col-8">
+              <hr />
+            </div>
+            <div class="col-2">
+              <div class="corner left-bottom"></div>
+            </div>
+          </div>
+          <!-- forth-section -->
+          <div
+            class="row align-items-center justify-content-end how-it-works d-flex"
+          >
+            <div class="col-6 text-right">
+              <h5>Semester Project</h5>
+              <p>
+                Working on a Covid-19 based project that actually applies SEIR
+                epidemiological model to, that shows whether the lock down in
+                India is effective or not. Trying to fit LSTM model to predict
+                the future pattern of Reproduction rate
+              </p>
+            </div>
+            <div
+              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">4</div>
+            </div>
+          </div>
+          <!--path between 4-5-->
+          <div class="row timeline">
+            <div class="col-2">
+              <div class="corner right-bottom"></div>
+            </div>
+            <div class="col-8">
+              <hr />
+            </div>
+            <div class="col-2">
+              <div class="corner top-left"></div>
+            </div>
+          </div>
+          <!--fifth section-->
+          <div class="row align-items-center how-it-works d-flex ex">
+            <div
+              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">5</div>
+            </div>
+            <div class="col-6">
+              <h5>Virtual Internship</h5>
+              <p>
+                Attended Virtual Experience Program in Data @ANZ on synthesized
+                transaction of bank having the daily transactions of all
+                customers.
+              </p>
+            </div>
+          </div>
+          <!-- path 5-6 -->
+          <div class="row timeline">
+            <div class="col-2">
+              <div class="corner top-right"></div>
+            </div>
+            <div class="col-8">
+              <hr />
+            </div>
+            <div class="col-2">
+              <div class="corner left-bottom"></div>
+            </div>
+          </div>
+          <!-- sixth section -->
+          <div
+            class="row align-items-center justify-content-end how-it-works d-flex"
+          >
+            <div class="col-6 text-right">
+              <h5>
+                SQL & Database Design A-Z™: Learn MS SQL Server + PostgreSQL
+              </h5>
+              <p>Organization: Udemy</p>
+              <p>Credential ID: UC-395d6821-7495-4233-a07d-5fbbb959926a</p>
+              <p>
+                Credential Url:
+                <a
+                  href="https://ude.my/UC-395d6821-7495-4233-a07d-5fbbb959926a"
+                  style="text-decoration: none; color: green"
+                  >See Certificate</a
+                >
+              </p>
+            </div>
+            <div
+              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">6</div>
+            </div>
+          </div>
+          <!--path between 6-7-->
+          <div class="row timeline">
+            <div class="col-2">
+              <div class="corner right-bottom"></div>
+            </div>
+            <div class="col-8">
+              <hr />
+            </div>
+            <div class="col-2">
+              <div class="corner top-left"></div>
+            </div>
+          </div>
+          <!--seventh section-->
+          <div class="row align-items-center how-it-works d-flex">
+            <div
+              class="col-2 text-center top d-inline-flex justify-content-center align-items-center"
+            >
+              <div class="circle font-weight-bold">7</div>
+            </div>
+            <div class="col-6">
+              <h5>
+                Machine Learning A-Z™: Hands-On Python & R In Data Science
+              </h5>
+              <p>Organization: Udemy</p>
+              <p>
+                Credential Url:
+                <a
+                  href="https://ude.my/UC-deaf07a3-26ab-4055-9f70-c19df8eb3be3"
+                  style="text-decoration: none; color: green"
+                  >See Certificate</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var typed = new Typed("#home_animate", {
+        strings: ["Data Scientist", "Statistician", "Developer"],
+        typespeed: 5000,
+        backspeed: 5000,
+        backDelay: 2000,
+        showCursor: true,
+        cursorChar: "|",
+        autoInsertCss: true,
+        loop: true,
+      });
+      $(".about-link").on("click", function () {
+        $(".About").addClass("down ");
+      });
+      $(".resume-link").on("click", function () {
+        $(".resume").addClass("down-resume");
+      });
+      $(".project-link").on("click", function () {
+        $(".project").addClass("down-project");
+      });
+      $(".about_cross").click(function () {
+        $(".About").removeClass("down");
+        $(".resume").removeClass("down-resume");
+        $(".project").removeClass("down-project");
+      });
+      var joinDate = new Date("02/03/2020");
+      var currentDate = new Date();
+      var Difference_In_Time = currentDate.getTime() - joinDate.getTime();
+      var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+      var ex_time = document.querySelector("#ex-number");
+      var timeList = [];
+      if (Difference_In_Days >= 365) {
+        var year = Math.floor(Difference_In_Days / 365);
+        timeList.push(year);
+        if (Difference_In_Days % 365 >= 30) {
+          var month = Math.floor((Difference_In_Days % 365) / 30);
+          timeList.push(month);
+        }
+      } else {
+        timeList.push(0);
+        var months = Math.floor(Difference_In_Days / 30);
+        timeList.push(months);
+        console.log(months);
+      }
+      ex_time.innerHTML = `(${timeList[0]} years ${timeList[1]} months)`;
+      var age = document.querySelector("#age");
+      var diff = new Date().getFullYear() - 1997;
+      age.innerHTML = diff;
+    </script>
+  </body>
+</html>
