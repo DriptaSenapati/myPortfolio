@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 #cache_buster = CacheBuster(config=config)
 
-#cache_buster.init_app(app)
+# cache_buster.init_app(app)
 
 
 @app.route('/')
@@ -20,4 +20,4 @@ def getpdf(filename):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0', debug=True)
