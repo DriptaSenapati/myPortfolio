@@ -23,6 +23,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     /> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <noscript>
       <style>
@@ -78,9 +84,9 @@
         </div>
       </div>
     </nav>
-    <section class="home">
+    <section class="home" id="particles-js">
       <div class="home_name">
-        <h1>DRIPTA SENAPATI</h1>
+        <h1>Dripta <span style="color: #d0a85f">Senapati</span></h1>
         <p>
           Data Scientist at
           <a
@@ -90,25 +96,30 @@
           >
         </p>
         <h1 class="home_animate_heading">
-          I'm a <span id="home_animate"></span>
+          I'm a <span id="home_animate" style="color: #5fa8cc"></span>
         </h1>
       </div>
       <div class="logos">
         <ul>
           <li>
-            <a href="https://www.linkedin.com/in/dripta-senapati-088b5b199/"
-              ><img
-                src="{{ url_for('static', filename='img/linkdn.png')}}"
-                alt="linkdn"
-            /></a>
+            <a
+              href="https://www.linkedin.com/in/dripta-senapati-088b5b199/"
+              target="_blank"
+              ><i
+                class="fa fa-linkedin fa-2x"
+                aria-hidden="true"
+                style="color: white"
+              ></i
+            ></a>
           </li>
           <li>
-            <a href="https://github.com/DriptaSenapati"
-              ><img
-                src="{{ url_for('static', filename='img/github.png')}}"
-                alt="github"
-                class="git"
-            /></a>
+            <a href="https://github.com/DriptaSenapati" target="_blank"
+              ><i
+                class="fa fa-github fa-2x"
+                aria-hidden="true"
+                style="color: white"
+              ></i
+            ></a>
           </li>
         </ul>
       </div>
@@ -118,7 +129,7 @@
         >&#10006;</span
       >
       <div class="aboutContainer">
-        <h2>About Me</h2>
+        <h2>About <span style="color: rgb(226, 166, 53)">&nbsp;Me</span></h2>
         <div class="flex-container">
           <img
             src="{{ url_for('static', filename='img/aboutDP.jpg')}}"
@@ -128,11 +139,18 @@
           <div class="about_data">
             <p>
               I am a Post graduate in Statistics.Working hard to learn and apply
-              my knowledge of Statistics and Computer Science to develop robust
-              and scalable models. <br />The rapid development in the field of
-              Artificial Intelligence and Machine learning has become an
-              attraction for me. I am always willing to innovate new things that
-              can improve existing technologies. <br />Working in Objectsol has
+              my knowledge of
+              <span style="color: rgb(233, 177, 74)"
+                >Statistics and Computer Science</span
+              >
+              to develop robust and scalable models. <br />The rapid development
+              in the field of
+              <span style="color: rgb(233, 177, 74)"
+                >Artificial Intelligence and Machine learning</span
+              >
+              has become an attraction for me. I am always willing to innovate
+              new things that can improve existing technologies. <br />Working
+              in <span style="color: rgb(233, 177, 74)">Objectsol</span> has
               made me confident and has allowed me to expand my horizon. The
               courage to take risks when required and give out the best results
               possible is what sets me apart from everybody!
@@ -146,11 +164,14 @@
               "
             ></div>
             <div class="grid-box">
-              <p class="item">Name: Dripta Senapati</p>
+              <p class="item">
+                Name:
+                <span style="color: rgb(233, 177, 74)">Dripta Senapati</span>
+              </p>
               <p class="item">Age: <span id="age"></span></p>
               <p class="item">
                 Email:
-                <a href="mailto:driptasenapati97@gmail.com" style="color: green"
+                <a href="mailto:driptasenapati97@gmail.com" style="color: wheat"
                   >driptasenapati97@gmail.com</a
                 >
               </p>
@@ -158,12 +179,15 @@
                 Linkdin Id:
                 <a
                   href="https://www.linkedin.com/in/dripta-senapati-088b5b199/"
-                  style="color: green"
+                  style="color: wheat"
                   >Dripta Senapati</a
                 >
               </p>
             </div>
-            <a href="{{ url_for('getpdf', filename='Dripta_Resume')}}">
+            <a
+              href="{{ url_for('getpdf', filename='Dripta_Resume')}}"
+              target="_blank"
+            >
               <button type="button" class="btn btn-outline-success">
                 Download CV
               </button>
@@ -177,7 +201,7 @@
             src="{{ url_for('static', filename='img/img.png')}}"
             alt="comma"
           />
-          <p>
+          <p style="text-align: left">
             Dripta is a gifted programmer and has a great ability for deductive
             reasoning. I have worked with him on a couple of projects, both
             directly and indirectly. He has great insights and a clear thought
@@ -193,7 +217,7 @@
           <h3>
             <a
               href="https://www.linkedin.com/in/debacharyaa/"
-              style="color: green; text-decoration: none"
+              style="color: rgb(252, 188, 70); text-decoration: none"
               >Debabrata Acharya</a
             >
           </h3>
@@ -206,11 +230,20 @@
         >&#10006;</span
       >
       <div class="resumeContainer">
-        <h2 style="color: green; margin-bottom: 70px">My Resume</h2>
+        <h2 style="margin-bottom: 70px; color: white">
+          <span style="color: rgb(196, 144, 47)">My</span>&nbsp;Resume
+        </h2>
+        <div class="quicklinks" style="color: wheat">
+          <ul>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li><a href="#experience">Work Experience</a></li>
+            <li><a href="#education">Education</a></li>
+          </ul>
+        </div>
         <div class="resumedata">
           <ul>
-            <li>
-              <div class="li-item skills">
+            <li id="skills">
+              <div class="li-items skills">
                 <h3 style="text-align: left; color: whitesmoke">
                   Technical Skills
                 </h3>
@@ -246,19 +279,37 @@
                 </div>
               </div>
             </li>
-            <li>
+            <li id="experience">
               <div class="li-items experience">
                 <h3 style="text-align: left; color: whitesmoke">
                   Work Experience
                 </h3>
                 <div class="work_experience">
-                  <h4 class="pname" style="color: green">Data Scientist</h4>
-                  <p style="color: black; font-size: 20px">
+                  <h4 class="pname" style="color: rgb(255, 255, 255)">
+                    Data Scientist
+                  </h4>
+                  <p
+                    style="
+                      color: black;
+                      font-size: 20px;
+                      font-weight: 300;
+                      font-weight: 700 !important;
+                      font-style: italic;
+                      font-family: math;
+                    "
+                  >
                     Objectsol Technologies Pvt. Ltd.
                   </p>
                   <p>Feb 2020 - present <span id="ex-number"></span></p>
                   <p>Saltlake</p>
-                  <p class="JD" style="color: rgb(51, 90, 82); font-size: 19px">
+                  <p
+                    class="JD"
+                    style="
+                      color: rgb(199, 153, 67);
+                      font-size: 19px;
+                      text-align: left;
+                    "
+                  >
                     Job Description:
                   </p>
                   <p style="color: black">
@@ -272,10 +323,10 @@
                 </div>
               </div>
             </li>
-            <li>
-              <div class="li-items eduaction">
+            <li id="education">
+              <div class="li-items education">
                 <h3 style="text-align: left; color: whitesmoke">Education</h3>
-                <div class="timeline_eduction" style="color: white">
+                <div class="timeline_education" style="color: white">
                   <ul class="timeline">
                     <li class="event" data-date="2018-2020">
                       <h3>Post-graduation</h3>
@@ -323,8 +374,13 @@
       >
       <div class="projectContainer" style="color: wheat">
         <div class="container">
-          <h2 class="pb-3 pt-2 border-bottom mb-5">
-            List of my <strong>Accomplishments</strong>
+          <h2 class="pb-3 pt-2 border-bottom mb-5" style="color: white">
+            List of my
+            <strong
+              ><span style="color: rgb(226, 166, 53)"
+                >&nbsp;Accomplishments</span
+              ></strong
+            >
           </h2>
           <!--first section-->
           <div class="row align-items-center how-it-works d-flex">
@@ -575,7 +631,8 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-
+    <script src="{{url_for('static', filename='js/particles.js')}}"></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
     <script>
       var typed = new Typed("#home_animate", {
         strings: ["Data Scientist", "Statistician", "Developer"],
@@ -600,6 +657,15 @@
         $(".About").removeClass("down");
         $(".resume").removeClass("down-resume");
         $(".project").removeClass("down-project");
+        if ($(".testimonial-content").hasClass("testimonial-contentUp")) {
+          $(".testimonial-content").removeClass("testimonial-contentUp");
+        }
+        if ($(".experience").hasClass("experienceUp")) {
+          $(".experience").removeClass("experienceUp");
+        }
+        if ($(".education").hasClass("educationUp")) {
+          $(".education").removeClass("educationUp");
+        }
       });
       var joinDate = new Date("02/03/2020");
       var currentDate = new Date();
@@ -624,6 +690,66 @@
       var age = document.querySelector("#age");
       var diff = new Date().getFullYear() - 1997;
       age.innerHTML = diff;
+      var aboutsection = document.querySelector(".About");
+      var resumeSection = document.querySelector(".resume");
+      var abouttestimonial = document.querySelector(".content-box");
+      var experience = document.querySelector(".experience");
+      var windowheight = window.innerHeight;
+      var quicklink = document.querySelector(".quicklinks");
+      function scrollAppear() {
+        var abouttestimonial_location = abouttestimonial.getBoundingClientRect()
+          .top;
+        var experience_location = experience.getBoundingClientRect().top;
+        var education_loaction = document
+          .querySelector(".education")
+          .getBoundingClientRect().top;
+        console.log(experience_location);
+        console.log(windowheight);
+        if ($(".About").hasClass("down")) {
+          if (
+            $(".testimonial-content").hasClass(".testimonial-contentUp") != true
+          ) {
+            if (abouttestimonial_location < windowheight / 1.5) {
+              $(".testimonial-content").addClass("testimonial-contentUp");
+            } else {
+              if ($(".testimonial-content").hasClass("testimonial-contentUp")) {
+                $(".testimonial-content").removeClass("testimonial-contentUp");
+              }
+            }
+          }
+        }
+        if ($(".resume").hasClass("down-resume")) {
+          if ($(".experience").hasClass("experienceUp") != true) {
+            if (experience_location < windowheight / 1.5) {
+              $(".experience").addClass("experienceUp");
+            }
+          } else {
+            if (experience_location > windowheight / 1.5) {
+              if ($(".experience").hasClass("experienceUp")) {
+                $(".experience").removeClass("experienceUp");
+              }
+            }
+          }
+          if ($(".education").hasClass("educationUp") != true) {
+            if (education_loaction < windowheight / 1.5) {
+              $(".education").addClass("educationUp");
+            }
+          } else {
+            if (education_loaction > windowheight / 1.5) {
+              if ($(".education").hasClass("educationUp")) {
+                $(".education").removeClass("educationUp");
+              }
+            }
+          }
+          if (quicklink.getBoundingClientRect().top == 0) {
+            quicklink.style.background = "black";
+          } else {
+            quicklink.style.background = "transparent";
+          }
+        }
+      }
+      aboutsection.addEventListener("scroll", scrollAppear);
+      resumeSection.addEventListener("scroll", scrollAppear);
     </script>
   </body>
 </html>
