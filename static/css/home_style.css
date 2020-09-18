@@ -521,6 +521,7 @@
 }
 .education .timeline_education {
   width: fit-content;
+  width: -moz-fit-content;
   margin: auto;
   opacity: 0;
   transform: translateX(30px);
