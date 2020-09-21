@@ -31,6 +31,15 @@
   padding: 10px 0px 10px 0px !important;
   color: wheat !important;
 }
+svg {
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
+  pointer-events: none;
+}
+svg g rect:nth-child(1) {
+  stroke: none;
+}
 .nav-link:hover {
   border-bottom: 2px solid white;
   padding: 10px 0px 3px 0px !important;
@@ -768,5 +777,8 @@
   .logos {
     left: 5%;
     bottom: 3%;
+  }
+  svg {
+    display: none;
   }
 }
