@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/logo-modified.png')}}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      h1 {
+        text-align: center;
+        margin: 30px;
+      }
+      .testimoni_container {
+        text-align: center;
+        margin: 30px auto;
+        width: 50%;
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(130, 130, 148, 0.966);
+      }
+      .testimoni {
+        width: 95%;
+        margin: 10px auto;
+        padding: 10px;
+        overflow: hidden;
+        position: relative;
+        background: rgba(179, 179, 179, 0.219);
+        border-radius: 10px;
+      }
+      .testimoni span {
+        display: block;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+      }
+      .post_control {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        opacity: 0;
+        border-radius: 0px 0px 10px 10px;
+        transform: translateY(20px);
+        z-index: 100;
+        transition: all 0.7s ease;
+      }
+      .testimoni:hover .post_control {
+        visibility: visible;
+        transform: translateY(0px);
+        opacity: 1;
+      }
+      .testimoni:hover span {
+        width: 2000px;
+        height: 2000px;
+      }
+
+      .post_control .control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+      }
+      .post_control .control i {
+        margin: 30px;
+        color: rgb(53, 53, 53) !important;
+      }
+      .account-img {
+        height: 125px;
+        width: 125px;
+        margin-right: 10px;
+      }
+      .skill_container {
+        text-align: center;
+        margin: 30px auto;
+        width: 50%;
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(130, 130, 148, 0.966);
+      }
+      .skill_list_container div {
+        margin: 10px;
+        background: linear-gradient(
+          to right,
+          rgba(214, 240, 231, 0.938),
+          white
+        );
+        border-radius: 10px;
+      }
+      .skill_list_container div:hover i {
+        visibility: visible !important;
+      }
+      .project_container {
+        text-align: center;
+        margin: 30px auto;
+        width: 50%;
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(130, 130, 148, 0.966);
+      }
+      .project {
+        position: relative;
+        padding: 10px 50px;
+        overflow: hidden;
+        margin: 10px;
+        background: linear-gradient(to right bottom, #cce3e8bf, white);
+        border-radius: 10px;
+      }
+      .project i {
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(15px);
+        transition: all 0.3s ease-in;
+        color: rgb(87, 87, 87);
+      }
+      .project:hover i {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0px);
+      }
+      #del_project {
+        position: absolute;
+        top: 45%;
+        left: 10px;
+      }
+      #edit_project {
+        position: absolute;
+        top: 45%;
+        right: 10px;
+      }
+      .job_container {
+        text-align: center;
+        margin: 30px auto;
+        width: 50%;
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(130, 130, 148, 0.966);
+      }
+      .job {
+        position: relative;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: linear-gradient(
+          to right bottom,
+          rgba(255, 182, 182, 0.788),
+          rgb(226, 226, 226)
+        );
+      }
+      .job_control {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 100;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+      }
+      .job:hover .job_control {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0px);
+      }
+      .job_control .control {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+      }
+      .job_control .control i {
+        margin: 20px;
+        color: rgb(90, 90, 90);
+      }
+      .job span {
+        display: block;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        transition: height 0.5s, width 0.5s;
+        z-index: 1;
+      }
+      .job:hover span {
+        width: 2000px;
+        height: 2000px;
+      }
+      h1 {
+        font-family: "Sansita Swashed", cursive;
+        color: rgb(162 123 94);
+        text-shadow: 5px 3px 6px #b9b4b4;
+      }
+      @media screen and (max-width: 1000px){
+        h1{
+          font-size: 31px;
+        }
+        .testimoni_container{
+          width: 90%;
+          margin: 15px;
+        }
+        .testimoni_container h2{
+          font-size: 20px;
+        }
+        .testimoni_container h3{
+          font-size: 15px;
+        }
+        .testimoni_container h4{
+          font-size: 13px;
+        }
+        .testimoni p{
+          font-size: 10px;
+          text-align: left;
+        }
+        .testimoni img{
+          width: 64px;
+          height: 64px;
+        }
+        .skill_container{
+          width: 90%;
+          margin: 15px;
+        }
+        .skill_container h2{
+          font-size: 20px;
+        }
+        .skill_list_container span{
+          font-size: 12px;
+        }
+        .project_container{
+          width: 90%;
+          margin: 15px;
+        }
+        .project_container p{
+          font-size: 10px;
+        }
+        .project_container h2{
+          font-size: 20px;
+        }
+        .job_container{
+          width: 90%;
+          margin: 15px;
+        }
+        .job_container h2{
+          font-size: 20px;
+        }
+        .job_container p{
+          font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('home')}}" target="_blank"
+                >Website</a
+              >
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('login')}}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1>My Portfolio data</h1>
+    <div class="testimoni_container">
+      <h2 style="display: inline-block; margin: 15px">Recommendation</h2>
+      <a href="{{url_for('add_entry',form_type='testimoni')}}"
+        ><i
+          class="fa fa-plus fa-2x"
+          aria-hidden="true"
+          style="color: indigo"
+          id="add_test"
+        ></i
+      ></a>
+      <hr />
+
+      {% for test in testimoni %}
+      <div class="testimoni media">
+        <span></span>
+        <img
+          class="rounded-circle account-img"
+          src="{{ url_for('static',filename='img/'+test.image_file) }}"
+        />
+        <div class="media-body">
+          <h3>{{test.name}}</h3>
+          <h4>{{test.desc}}</h4>
+          <p>{{test.testimony}}</p>
+        </div>
+        <div class="post_control">
+          <div class="control">
+            <a
+              href="{{url_for('edit_post',data_id=test.id,form_type='testimoni')}}"
+              ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i
+            ></a>
+            <a
+              href="{{url_for('delete_post',data_id=test.id,form_type='testimoni')}}"
+              ><i class="fa fa-trash fa-2x" aria-hidden="true"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="skill_container">
+      <h2 style="display: inline-block; margin: 15px">Skill List</h2>
+      <a href="{{url_for('add_entry',form_type='skill')}}"
+        ><i
+          class="fa fa-plus fa-2x"
+          aria-hidden="true"
+          style="color: indigo"
+          id="add_skill"
+        ></i
+      ></a>
+      <hr />
+      <div class="skill_list_container">
+        {% for i in skills %}
+        <div style="position: relative; height: 50px">
+          <span>{{i.sk_name}} <span>: {{i.sk_value}}</span> </span>
+          <a href="{{url_for('delete_post',data_id=i.id,form_type='skill')}}"
+            ><i
+              class="fa fa-trash fa-2x"
+              aria-hidden="true"
+              style="
+                position: absolute;
+                right: 20px;
+                visibility: hidden;
+                top: 28%;
+                color: rgb(48, 48, 48);
+              "
+            ></i
+          ></a>
+          <a href="{{url_for('edit_post',data_id=i.id ,form_type='skill')}}"
+            ><i
+              class="fa fa-pencil-square-o fa-2x"
+              aria-hidden="true"
+              id="edit_skill"
+              style="
+                position: absolute;
+                left: 20px;
+                visibility: hidden;
+                top: 28%;
+                color: rgb(48, 48, 48);
+              "
+            ></i
+          ></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="project_container">
+      <h2 style="display: inline-block; margin: 15px">Project List</h2>
+      <a href="{{url_for('add_entry',form_type='project')}}"
+        ><i
+          class="fa fa-plus fa-2x"
+          aria-hidden="true"
+          style="color: indigo"
+          id="add_skill"
+        ></i
+      ></a>
+      <hr />
+      <div class="project_list_container">
+        {% for p in projects %}
+        <div class="project">
+          <h6>{{p.p_name}}</h6>
+          {% if p.p_description %}
+          <p>{{p.p_description}}</p>
+          {% endif %} {% if p.p_url %} {% if 'pypi' in p.p_url %}
+          <p>Pypi Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
+          {% else %} {% if 'github' in p.p_url %}
+          <p>GitHub Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
+          {% else %}
+          <p>Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
+          {% endif %} {% endif %} {% endif %} {% if p.Organization %}
+          <p>Organization: {{p.Organization}}</p>
+          {% endif %} {% if p.cred_id %}
+          <p>Credential id: {{p.cred_id}}</p>
+          {% endif %} {% if p.certi_url %}
+          <p>Credential Url: <a href="{{p.certi_url}}">{{p.certi_url}}</a></p>
+          {% endif %}
+          <a href="{{url_for('delete_post',data_id=p.id,form_type='project')}}"
+            ><i
+              class="fa fa-trash fa-2x"
+              aria-hidden="true"
+              id="del_project"
+            ></i
+          ></a>
+          <a href="{{url_for('edit_post',data_id=p.id ,form_type='project')}}"
+            ><i
+              class="fa fa-pencil-square-o fa-2x"
+              aria-hidden="true"
+              id="edit_project"
+            ></i
+          ></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="job_container">
+      <h2 style="display: inline-block; margin: 15px">Job List</h2>
+      <a href="{{url_for('add_entry',form_type='job')}}"
+        ><i
+          class="fa fa-plus fa-2x"
+          aria-hidden="true"
+          style="color: indigo"
+          id="add_job"
+        ></i
+      ></a>
+      <hr />
+      <div class="job_list_container">
+        {% for job in jobs %}
+        <div class="job">
+          <span></span>
+          <h6>{{job.role}}</h6>
+          <p>{{job.company}}</p>
+          {% if not job.end %}
+          <p>{{job.start.strftime("%b %Y")}}-present</p>
+          {% else %}
+          <p>{{job.start.strftime("%b %Y")}}-{{job.end.strftime("%b %Y")}}</p>
+          {% endif %}
+          <p>{{job.place}}</p>
+          <p>{{job.jd}}</p>
+          <div class="job_control">
+            <div class="control">
+              <a
+                href="{{url_for('delete_post',data_id=job.id,form_type='job')}}"
+                ><i class="fa fa-trash fa-2x" aria-hidden="true"></i
+              ></a>
+              <a href="{{url_for('edit_post',data_id=job.id ,form_type='job')}}"
+                ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $(".testimoni").on("mouseenter", function (e) {
+          (x = e.pageX - $(this).offset().left),
+            (y = e.pageY - $(this).offset().top);
+          $(this).find("span").css({ top: y, left: x });
+        });
+        $(".testimoni").on("mouseout", function (e) {
+          (x = e.pageX - $(this).offset().left),
+            (y = e.pageY - $(this).offset().top);
+          $(this).find("span").css({ top: y, left: x });
+        });
+        $(".job").on("mouseenter", function (e) {
+          (x = e.pageX - $(this).offset().left),
+            (y = e.pageY - $(this).offset().top);
+          $(this).find("span").css({ top: y, left: x });
+        });
+        $(".job").on("mouseout", function (e) {
+          (x = e.pageX - $(this).offset().left),
+            (y = e.pageY - $(this).offset().top);
+          $(this).find("span").css({ top: y, left: x });
+        });
+      });
+    </script>
+  </body>
+</html>

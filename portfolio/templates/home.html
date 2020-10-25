@@ -29,6 +29,10 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/project_timeline.css')}}"
+    />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <noscript>
       <style>
@@ -44,7 +48,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="{{ url_for('login')}}" target="_blank"
           ><img
             src="{{ url_for('static', filename='img/logo-modified.png')}}"
             alt=""
@@ -123,18 +127,6 @@
           </li>
         </ul>
       </div>
-      <script
-        type="text/javascript"
-        src="https://freehitcounters.org/count/7ihz"
-      ></script>
-      <br />
-      <a href="https://www.horando.de/luxusuhren/tag-heuer/" style="opacity: 0"
-        >https://www.horando.de/luxusuhren/tag-heuer/</a
-      >
-      <script
-        type="text/javascript"
-        src="https://whomania.com/ctr?id=dd15c8af88632e315bd2dd95929ea053e2d48945"
-      ></script>
     </section>
     <section class="About" id="About">
       <span style="font-size: 20px; color: white" class="about_cross"
@@ -208,21 +200,15 @@
         </div>
       </div>
       <div class="testimonial-content">
+        {% for i in testimoni_data %}
         <div class="content-box">
           <img
             src="{{ url_for('static', filename='img/img.png')}}"
             alt="comma"
           />
-          <p style="text-align: left">
-            Dripta is a gifted programmer and has a great ability for deductive
-            reasoning. I have worked with him on a couple of projects, both
-            directly and indirectly. He has great insights and a clear thought
-            process. I am yet to see him back out from a hurdle, which he never
-            does. He is a prompt team player and has a especial thirst for
-            everything Python!
-          </p>
+          <p style="text-align: left">{{i.testimony}}</p>
           <img
-            src="{{ url_for('static', filename='img/recom.jpg')}}"
+            src="{{ url_for('static', filename='img/'+i.image_file)}}"
             alt="userimg"
             class="rounded img-fluid recompic"
           />
@@ -230,11 +216,12 @@
             <a
               href="https://www.linkedin.com/in/debacharyaa/"
               style="color: rgb(252, 188, 70); text-decoration: none"
-              >Debabrata Acharya</a
+              >{{i.name}}</a
             >
           </h3>
-          <p>University Research Scholar | Software Developer</p>
+          <p>{{i.desc}}</p>
         </div>
+        {% endfor %}
       </div>
     </section>
     <section class="resume">
@@ -260,34 +247,16 @@
                   Technical Skills
                 </h3>
                 <div class="skills-grid">
+                  {% for j in skills %}
                   <div class="skills-grid-items">
-                    <p>Python</p>
-                    <div class="progress_bar1" style="--width: 70"></div>
+                    <p>{{j.sk_name}}</p>
+                    <div
+                      class="progress_bar1"
+                      style="--width: {{j.sk_value}}"
+                      data-skill="{{j.sk_value}}"
+                    ></div>
                   </div>
-                  <div class="skills-grid-items">
-                    <p>SQL</p>
-                    <div class="progress_bar2" style="--width: 40"></div>
-                  </div>
-                  <div class="skills-grid-items">
-                    <p>Machine Learning and Analysis</p>
-                    <div class="progress_bar3" style="--width: 60"></div>
-                  </div>
-                  <div class="skills-grid-items">
-                    <p>R Programming</p>
-                    <div class="progress_bar4" style="--width: 30"></div>
-                  </div>
-                  <div class="skills-grid-items">
-                    <p>MS Excel</p>
-                    <div class="progress_bar5" style="--width: 40"></div>
-                  </div>
-                  <div class="skills-grid-items">
-                    <p>MS word</p>
-                    <div class="progress_bar6" style="--width: 70"></div>
-                  </div>
-                  <div class="skills-grid-items">
-                    <p>MS Powerpoint</p>
-                    <div class="progress_bar7" style="--width: 60"></div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
             </li>
@@ -296,9 +265,10 @@
                 <h3 style="text-align: left; color: whitesmoke">
                   Work Experience
                 </h3>
+                {% for j in jobs %}
                 <div class="work_experience">
                   <h4 class="pname" style="color: rgb(255, 255, 255)">
-                    Data Scientist
+                    {{j.role}}
                   </h4>
                   <p
                     style="
@@ -310,10 +280,14 @@
                       font-family: math;
                     "
                   >
-                    Objectsol Technologies Pvt. Ltd.
+                    {{j.company}}
                   </p>
-                  <p>Feb 2020 - present <span id="ex-number"></span></p>
-                  <p>Saltlake</p>
+                  {% if not j.end %}
+                      <p>{{j.start.strftime("%b %Y")}}-present &nbsp ({{exp[jobs.index(j)]}})</p>
+                      {% else %}
+                    <p>{{j.start.strftime("%b %Y")}}-{{j.end.strftime("%b %Y")}} &nbsp ({{exp[jobs.index(j)]}})</p>
+                  {% endif %}
+                  <p>{{j.place}}</p>
                   <p
                     class="JD"
                     style="
@@ -325,14 +299,10 @@
                     Job Description:
                   </p>
                   <p style="color: black">
-                    It is a software based company, successfuly building apps
-                    for <strong>Android</strong>,
-                    <strong>iOS</strong>,<strong>IpTV</strong>. I have to
-                    develop backend algorithm which are based on some
-                    mathematical models and some
-                    <strong>Machine Learning algorithm</strong>
+                    {{j.jd}}
                   </p>
                 </div>
+                {% endfor %}
               </div>
             </li>
             <li id="education">
@@ -394,236 +364,32 @@
               ></strong
             >
           </h2>
-          <!--first section-->
-          <div class="row align-items-center how-it-works d-flex">
-            <div
-              class="col-2 text-center bottom d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">1</div>
-            </div>
-            <div class="col-6">
-              <h5>ChatBot</h5>
+          <div class="timeline_project">
+            {% for p in projects %}
+            <h2 class="timeline__item timeline__item--year">
+              {{projects.index(p) +1}}
+            </h2>
+            <div class="timeline__item">
+              <h3 class="timeline__title">{{p.p_name}}</h3>
+              {% if p.p_description %}
+              <p class="timeline__blurb">{{p.p_description}}</p>
+              {% endif %} {% if p.p_url %} {% if 'pypi' in p.p_url %}
+              <p>Pypi Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
+              {% else %} {% if 'github' in p.p_url %}
+              <p>GitHub Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
+              {% else %}
+              <p>Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
+              {% endif %} {% endif %} {% endif %} {% if p.Organization %}
+              <p>Organization: {{p.Organization}}</p>
+              {% endif %} {% if p.cred_id %}
+              <p>Credential id: {{p.cred_id}}</p>
+              {% endif %} {% if p.certi_url %}
               <p>
-                Built a simple <strong>ChatBot</strong>, based on Python, that
-                can-do simple jobs like opening apps, playing music, telling
-                weather information, telling time etc. The project is at an
-                intermediate level as of now.
+                Credential Url: <a href="{{p.certi_url}}">{{p.certi_url}}</a>
               </p>
+              {% endif %}
             </div>
-          </div>
-          <!--path between 1-2-->
-          <div class="row timeline">
-            <div class="col-2">
-              <div class="corner top-right"></div>
-            </div>
-            <div class="col-8">
-              <hr />
-            </div>
-            <div class="col-2">
-              <div class="corner left-bottom"></div>
-            </div>
-          </div>
-          <!--second section-->
-          <div
-            class="row align-items-center justify-content-end how-it-works d-flex"
-          >
-            <div class="col-6 text-right">
-              <h5>Covdata Python Package</h5>
-              <p>
-                Created a <strong>python package</strong>on Covid-19 that can
-                retrieve all the numerical data related to the COVID-19 spread
-                in India. This package has the power of filtering the data for
-                user’s choice and can visualize the death, recovered and
-                confirmed cases.
-              </p>
-              <p>
-                PyPi Link:
-                <a
-                  href="https://pypi.org/project/covdata/"
-                  style="text-decoration: none; color: green"
-                  >https://pypi.org/project/covdata/</a
-                >
-              </p>
-            </div>
-            <div
-              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">2</div>
-            </div>
-          </div>
-          <!--path between 2-3-->
-          <div class="row timeline">
-            <div class="col-2">
-              <div class="corner right-bottom"></div>
-            </div>
-            <div class="col-8">
-              <hr />
-            </div>
-            <div class="col-2">
-              <div class="corner top-left"></div>
-            </div>
-          </div>
-          <!--third section-->
-          <div class="row align-items-center how-it-works d-flex ex">
-            <div
-              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">3</div>
-            </div>
-            <div class="col-6">
-              <h5>Covdata Server</h5>
-              <p>
-                Have built a website for COVID-19 in India that gives
-                flexibility to users to see the data for varying filters and
-                also some graphical analyses are also done in website.
-              </p>
-              <p>
-                Server Link:
-                <a
-                  href="https://covdata.pythonanywhere.com/"
-                  style="text-decoration: none; color: green"
-                  >https://covdata.pythonanywhere.com/</a
-                >
-              </p>
-              <p>
-                GitHub Link:
-                <a
-                  href="https://github.com/DriptaSenapati/covidindiaServer"
-                  style="text-decoration: none; color: green"
-                  >https://github.com/DriptaSenapati/covidindiaServer</a
-                >
-              </p>
-            </div>
-          </div>
-          <!-- path 3-4 -->
-          <div class="row timeline">
-            <div class="col-2">
-              <div class="corner top-right"></div>
-            </div>
-            <div class="col-8">
-              <hr />
-            </div>
-            <div class="col-2">
-              <div class="corner left-bottom"></div>
-            </div>
-          </div>
-          <!-- forth-section -->
-          <div
-            class="row align-items-center justify-content-end how-it-works d-flex"
-          >
-            <div class="col-6 text-right">
-              <h5>Semester Project</h5>
-              <p>
-                Working on a Covid-19 based project that actually applies SEIR
-                epidemiological model to, that shows whether the lock down in
-                India is effective or not. Trying to fit LSTM model to predict
-                the future pattern of Reproduction rate
-              </p>
-            </div>
-            <div
-              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">4</div>
-            </div>
-          </div>
-          <!--path between 4-5-->
-          <div class="row timeline">
-            <div class="col-2">
-              <div class="corner right-bottom"></div>
-            </div>
-            <div class="col-8">
-              <hr />
-            </div>
-            <div class="col-2">
-              <div class="corner top-left"></div>
-            </div>
-          </div>
-          <!--fifth section-->
-          <div class="row align-items-center how-it-works d-flex ex">
-            <div
-              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">5</div>
-            </div>
-            <div class="col-6">
-              <h5>Virtual Internship</h5>
-              <p>
-                Attended Virtual Experience Program in Data @ANZ on synthesized
-                transaction of bank having the daily transactions of all
-                customers.
-              </p>
-            </div>
-          </div>
-          <!-- path 5-6 -->
-          <div class="row timeline">
-            <div class="col-2">
-              <div class="corner top-right"></div>
-            </div>
-            <div class="col-8">
-              <hr />
-            </div>
-            <div class="col-2">
-              <div class="corner left-bottom"></div>
-            </div>
-          </div>
-          <!-- sixth section -->
-          <div
-            class="row align-items-center justify-content-end how-it-works d-flex"
-          >
-            <div class="col-6 text-right">
-              <h5>
-                SQL & Database Design A-Z™: Learn MS SQL Server + PostgreSQL
-              </h5>
-              <p>Organization: Udemy</p>
-              <p>Credential ID: UC-395d6821-7495-4233-a07d-5fbbb959926a</p>
-              <p>
-                Credential Url:
-                <a
-                  href="https://ude.my/UC-395d6821-7495-4233-a07d-5fbbb959926a"
-                  style="text-decoration: none; color: green"
-                  >See Certificate</a
-                >
-              </p>
-            </div>
-            <div
-              class="col-2 text-center full d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">6</div>
-            </div>
-          </div>
-          <!--path between 6-7-->
-          <div class="row timeline">
-            <div class="col-2">
-              <div class="corner right-bottom"></div>
-            </div>
-            <div class="col-8">
-              <hr />
-            </div>
-            <div class="col-2">
-              <div class="corner top-left"></div>
-            </div>
-          </div>
-          <!--seventh section-->
-          <div class="row align-items-center how-it-works d-flex">
-            <div
-              class="col-2 text-center top d-inline-flex justify-content-center align-items-center"
-            >
-              <div class="circle font-weight-bold">7</div>
-            </div>
-            <div class="col-6">
-              <h5>
-                Machine Learning A-Z™: Hands-On Python & R In Data Science
-              </h5>
-              <p>Organization: Udemy</p>
-              <p>
-                Credential Url:
-                <a
-                  href="https://ude.my/UC-deaf07a3-26ab-4055-9f70-c19df8eb3be3"
-                  style="text-decoration: none; color: green"
-                  >See Certificate</a
-                >
-              </p>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -679,26 +445,26 @@
           $(".education").removeClass("educationUp");
         }
       });
-      var joinDate = new Date("02/03/2020");
-      var currentDate = new Date();
-      var Difference_In_Time = currentDate.getTime() - joinDate.getTime();
-      var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-      var ex_time = document.querySelector("#ex-number");
-      var timeList = [];
-      if (Difference_In_Days >= 365) {
-        var year = Math.floor(Difference_In_Days / 365);
-        timeList.push(year);
-        if (Difference_In_Days % 365 >= 30) {
-          var month = Math.floor((Difference_In_Days % 365) / 30);
-          timeList.push(month);
-        }
-      } else {
-        timeList.push(0);
-        var months = Math.floor(Difference_In_Days / 30);
-        timeList.push(months);
-        console.log(months);
-      }
-      ex_time.innerHTML = `(${timeList[0]} years ${timeList[1]} months)`;
+      // var joinDate = new Date("02/03/2020");
+      // var currentDate = new Date();
+      // var Difference_In_Time = currentDate.getTime() - joinDate.getTime();
+      // var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+      // var ex_time = document.querySelector("#ex-number");
+      // var timeList = [];
+      // if (Difference_In_Days >= 365) {
+      //   var year = Math.floor(Difference_In_Days / 365);
+      //   timeList.push(year);
+      //   if (Difference_In_Days % 365 >= 30) {
+      //     var month = Math.floor((Difference_In_Days % 365) / 30);
+      //     timeList.push(month);
+      //   }
+      // } else {
+      //   timeList.push(0);
+      //   var months = Math.floor(Difference_In_Days / 30);
+      //   timeList.push(months);
+      //   console.log(months);
+      // }
+      // ex_time.innerHTML = `(${timeList[0]} years ${timeList[1]} months)`;
       var age = document.querySelector("#age");
       var diff = new Date().getFullYear() - 1997;
       age.innerHTML = diff;

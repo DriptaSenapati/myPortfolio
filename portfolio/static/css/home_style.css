@@ -175,12 +175,9 @@ svg g rect:nth-child(1) {
 }
 .testimonial-content .content-box {
   width: 30%;
-  height: auto;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  height: 100%;
+  margin: 25px 30px;
+  display: inline-block;
   background: gray;
   border-radius: 10px;
   padding: 10px 10px;
@@ -189,6 +186,7 @@ svg g rect:nth-child(1) {
   transform: translateY(50px);
   transition: all 0.9s ease-in-out;
 }
+
 .testimonial-content .content-box::before {
   position: absolute;
   content: "";
@@ -318,7 +316,7 @@ svg g rect:nth-child(1) {
   position: relative;
 }
 .progress_bar1::before {
-  content: "70%";
+  content: attr(data-skill) "%";
   color: black;
   padding: 0px 0px 0px 10px;
   display: flex;
@@ -333,159 +331,11 @@ svg g rect:nth-child(1) {
   background-color: wheat;
   border-radius: 1.5em;
 }
-.progress_bar2 {
-  width: 90%;
-  height: 2em;
-  background: black;
-  color: green;
-  border-radius: 1.5em;
-  margin: auto;
-  position: relative;
-}
-.progress_bar2::before {
-  content: "40%";
-  color: black;
-  padding: 0px 0px 0px 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0.3em;
-  bottom: 0.3em;
-  top: 0.3em;
-  width: calc(var(--width, 0) * 1%);
-  min-width: 2rem;
-  max-width: calc(100% - 0.6em);
-  background-color: wheat;
-  border-radius: 1.5em;
-}
-.progress_bar3 {
-  width: 90%;
-  height: 2em;
-  background: black;
-  color: green;
-  border-radius: 1.5em;
-  margin: auto;
-  position: relative;
-}
-.progress_bar3::before {
-  content: "60%";
-  color: black;
-  padding: 0px 0px 0px 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0.3em;
-  bottom: 0.3em;
-  top: 0.3em;
-  width: calc(var(--width, 0) * 1%);
-  min-width: 2rem;
-  max-width: calc(100% - 0.6em);
-  background-color: wheat;
-  border-radius: 1.5em;
-}
-.progress_bar4 {
-  width: 90%;
-  height: 2em;
-  background: black;
-  color: green;
-  border-radius: 1.5em;
-  margin: auto;
-  position: relative;
-}
-.progress_bar4::before {
-  content: "30%";
-  color: black;
-  padding: 0px 0px 0px 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0.3em;
-  bottom: 0.3em;
-  top: 0.3em;
-  width: calc(var(--width, 0) * 1%);
-  min-width: 2rem;
-  max-width: calc(100% - 0.6em);
-  background-color: wheat;
-  border-radius: 1.5em;
-}
-.progress_bar5 {
-  width: 90%;
-  height: 2em;
-  background: black;
-  color: green;
-  border-radius: 1.5em;
-  margin: auto;
-  position: relative;
-}
-.progress_bar5::before {
-  content: "40%";
-  color: black;
-  padding: 0px 0px 0px 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0.3em;
-  bottom: 0.3em;
-  top: 0.3em;
-  width: calc(var(--width, 0) * 1%);
-  min-width: 2rem;
-  max-width: calc(100% - 0.6em);
-  background-color: wheat;
-  border-radius: 1.5em;
-}
-.progress_bar6 {
-  width: 90%;
-  height: 2em;
-  background: black;
-  color: green;
-  border-radius: 1.5em;
-  margin: auto;
-  position: relative;
-}
-.progress_bar6::before {
-  content: "70%";
-  color: black;
-  padding: 0px 0px 0px 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0.3em;
-  bottom: 0.3em;
-  top: 0.3em;
-  width: calc(var(--width, 0) * 1%);
-  min-width: 2rem;
-  max-width: calc(100% - 0.6em);
-  background-color: wheat;
-  border-radius: 1.5em;
-}
-.progress_bar7 {
-  width: 90%;
-  height: 2em;
-  background: black;
-  color: green;
-  border-radius: 1.5em;
-  margin: auto;
-  position: relative;
-}
-.progress_bar7::before {
-  content: "60%";
-  color: black;
-  padding: 0px 0px 0px 10px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0.3em;
-  bottom: 0.3em;
-  top: 0.3em;
-  width: calc(var(--width, 0) * 1%);
-  min-width: 2rem;
-  max-width: calc(100% - 0.6em);
-  background-color: wheat;
-  border-radius: 1.5em;
-}
+
 .work_experience {
   width: 500px;
   height: auto;
+  display: inline-block;
   background: #858482;
   border-radius: 10px;
   color: white;
@@ -493,7 +343,7 @@ svg g rect:nth-child(1) {
   border-left: 5px solid rgb(73 118 150);
   box-shadow: 5px 10px 10px #000000;
   transition: all 0.5s ease;
-  margin: auto;
+  margin: 50px;
   position: relative;
 }
 .work_experience::before {
@@ -533,12 +383,12 @@ svg g rect:nth-child(1) {
   width: -moz-fit-content;
   margin: auto;
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(30px);
   transition: all 0.6s cubic-bezier(0, 0.7, 0.7, 0.7);
 }
 .educationUp .timeline_education {
   opacity: 1;
-  transform: translateX(0px);
+  transform: translateY(0px);
 }
 .resumeContainer .timeline {
   position: relative;
@@ -629,85 +479,8 @@ svg g rect:nth-child(1) {
   max-height: 50px;
   z-index: 2;
 }
-
-.how-it-works.row .col-2 {
-  align-self: stretch;
-}
-.how-it-works.row .col-2::after {
-  content: "";
-  position: absolute;
-  border-left: 3px solid #ed8d8d;
-  z-index: 1;
-}
-.how-it-works.row .col-2.bottom::after {
-  height: 50%;
-  left: 50%;
-  top: 50%;
-}
-.how-it-works.row .col-2.full::after {
-  height: 100%;
-  left: calc(50% - 3px);
-}
-.ex.row .col-2.full::after {
-  height: 100%;
-  left: calc(50%);
-}
-.how-it-works.row .col-2.top::after {
-  height: 50%;
-  left: 50%;
-  top: 0;
-}
-
-.projectContainer .timeline div {
-  padding: 0;
-  height: 40px;
-}
-.projectContainer .timeline hr {
-  border-top: 3px solid #ed8d8d;
-  margin: 0;
-  top: 17px;
-  position: relative;
-}
-.projectContainer .timeline .col-2 {
-  display: flex;
-  overflow: hidden;
-}
-.projectContainer .timeline .corner {
-  border: 3px solid #ed8d8d;
-  width: 100%;
-  position: relative;
-  border-radius: 15px;
-}
-.projectContainer .timeline .top-right {
-  left: 50%;
-  top: -50%;
-}
-.projectContainer .timeline .left-bottom {
-  left: -50%;
-  top: calc(50% - 3px);
-}
-.projectContainer .timeline .top-left {
-  left: -50%;
-  top: -50%;
-}
-.projectContainer .timeline .right-bottom {
-  left: 50%;
-  top: calc(50% - 3px);
-}
 .projectContainer .container {
   margin-top: 100px !important;
-}
-.projectContainer .container .col-6 {
-  background: linear-gradient(to right, #28289c, transparent);
-  border-radius: 10px;
-  padding: 15px;
-  border-left: 1.5px solid rgb(12, 12, 68);
-}
-.projectContainer .container .text-right {
-  background: linear-gradient(to left, #28289c, transparent);
-  border-radius: 10px;
-  border-right: 1.5px solid rgb(12, 12, 68);
-  border-left: 0px solid transparent;
 }
 .projectContainer .container a {
   color: rgb(233, 169, 50) !important;
@@ -736,12 +509,14 @@ svg g rect:nth-child(1) {
   }
   .testimonial-content .content-box {
     width: 100%;
+    margin: 30px auto;
   }
   .skills-grid {
     grid-template-columns: 1fr;
   }
   .work_experience {
     width: 100%;
+    margin: 10px auto;
   }
   .event h3 {
     font-size: 19px;
