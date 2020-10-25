@@ -98,15 +98,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('home')}}" target="_blank">Website</a>
+            <a class="nav-link" href="{{url_for('main.home')}}" target="_blank">Website</a>
           </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+            <a class="nav-link" href="{{url_for('main.logout')}}">Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+            <a class="nav-link" href="{{url_for('main.login')}}">Login</a>
           </li>
           {% endif %}
         </ul>
@@ -265,7 +265,7 @@
           {{ form.submit(class="btn btn-outline-info") }}
         </span>
       {% endif %}
-      <a href="{{url_for('data')}}">
+      <a href="{{url_for('main.data')}}">
         <button type="button" class="btn btn-light">Cancel</button></a
       >
     </form>
@@ -290,7 +290,7 @@
                 </div>
               </div>
             </div>
-            <form method="POST" enctype="multipart/form-data" action="{{url_for('update_pic',data_id=image.id,form=form_pic)}}">
+            <form method="POST" enctype="multipart/form-data" action="{{url_for('main.update_pic',data_id=image.id,form=form_pic)}}">
               <div class="form-group">
                 {{ form_pic.picture.label() }}
                 {{ form_pic.picture(class="form-control-file") }}

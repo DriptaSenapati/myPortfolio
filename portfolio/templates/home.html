@@ -48,7 +48,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="{{ url_for('login')}}" target="_blank"
+        <a class="navbar-brand" href="{{ url_for('main.login')}}" target="_blank"
           ><img
             src="{{ url_for('static', filename='img/logo-modified.png')}}"
             alt=""
@@ -189,7 +189,7 @@
               </p>
             </div>
             <a
-              href="{{ url_for('getpdf', filename='Dripta_Resume')}}"
+              href="{{ url_for('main.getpdf', filename='Dripta_Resume')}}"
               target="_blank"
             >
               <button type="button" class="btn btn-outline-success">
