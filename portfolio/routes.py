@@ -257,9 +257,10 @@ def add_entry(form_type):
 
 @main.route('/<path:filename>', methods=['GET'])
 def getpdf(filename):
-    return send_from_directory(app.static_folder, f'{filename}.pdf')
+    print(main.static_folder)
+    return send_from_directory('static', f'{filename}.pdf')
 
 @main.route('/download/<path:filename>', methods=['GET'])
 def download(filename):
-    path = os.path.join(app.static_folder,'download')
+    path = os.path.join("static",'download')
     return send_from_directory(path, filename)
