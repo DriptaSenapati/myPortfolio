@@ -1,15 +1,15 @@
-from flask import Flask, render_template, send_from_directory, redirect, url_for, request, flash
+from flask import Flask, render_template, send_from_directory, redirect, url_for, request, flash,Blueprint
 from portfolio.forms import LoginForm, Testimoni_form, SkillForm, ProjectForm, JobForm,changepictureForm
 import os
 from PIL import Image
 from datetime import datetime
-from portfolio import app, db
-from flask_login import login_user, current_user, logout_user, login_required, LoginManager, UserMixin
+from flask_login import login_user, current_user, logout_user, login_required
 from portfolio.models import Testimonial, User, Job, Project, Skills
-from werkzeug.datastructures import FileStorage
+
+main = Blueprint('main', __name__)
 
 
-@app.route('/')
+@main.route('/')
 def home():
     testimoni = Testimonial.query.all()
     sk_data = Skills.query.all()
@@ -36,28 +36,28 @@ def home():
     return render_template('home.html', testimoni_data=testimoni, skills=sk_data,projects = project,jobs=job,exp=exp_list)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('data'))
+        return redirect(url_for('main.data'))
     login = LoginForm()
     if login.validate_on_submit():
         user_data = User.query.filter_by(email=login.email.data).first()
         if user_data and user_data.password == login.password.data:
             login_user(user_data)
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', form=login)
 
 
-@app.route("/logout")
+@main.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('main.login'))
 
 
-@app.route('/formdata', methods=['GET', 'POST'])
+@main.route('/formdata', methods=['GET', 'POST'])
 @login_required
 def data():
     testimonial_data = Testimonial.query.all()
@@ -83,7 +83,7 @@ def save_picture(form_picture):
     return form_picture.filename
 
 
-@app.route('/formdata/<path:form_type>/<int:data_id>', methods=['GET', 'POST'])
+@main.route('/formdata/<path:form_type>/<int:data_id>', methods=['GET', 'POST'])
 @login_required
 def edit_post(data_id, form_type):
     if form_type == 'testimoni':
@@ -95,7 +95,7 @@ def edit_post(data_id, form_type):
             testimoni_data.desc = test_form.desc.data
             testimoni_data.testimony = test_form.main.data
             db.session.commit()
-            return redirect(url_for('data'))    
+            return redirect(url_for('main.data'))    
         elif request.method == 'GET':
             test_form.name.data = testimoni_data.name
             test_form.desc.data = testimoni_data.desc
@@ -109,7 +109,7 @@ def edit_post(data_id, form_type):
             skilldata.sk_name = skill_add_form.skillsname.data
             skilldata.sk_value = skill_add_form.skills.data
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         elif request.method == 'GET':
             skill_add_form.skillsname.data = skilldata.sk_name
             skill_add_form.skills.data = skilldata.sk_value
@@ -130,7 +130,7 @@ def edit_post(data_id, form_type):
             projectdata.cred_id=projectform.Credential.data
             projectdata.certi_url = projectform.Certificate.data
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         elif request.method == 'GET':
             projectform.title.data = projectdata.p_name
             projectform.Description.data = projectdata.p_description
@@ -155,7 +155,7 @@ def edit_post(data_id, form_type):
             jobdata.place=jobform.place.data
             jobdata.jd=jobform.jd.data
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         elif request.method == 'GET':
             jobform.role.data = jobdata.role
             jobform.company.data = jobdata.company
@@ -170,7 +170,7 @@ def edit_post(data_id, form_type):
         return render_template('edit_data.html', form=jobform, type=form_type)
             
 
-@app.route('/update/<int:data_id>', methods=['POST'])
+@main.route('/update/<int:data_id>', methods=['POST'])
 def update_pic(data_id):
     testimoni_data = Testimonial.query.filter_by(id=data_id).first()
     pic_form = changepictureForm(id=data_id)
@@ -181,9 +181,9 @@ def update_pic(data_id):
         testimoni_data.image_file = 'recom.jpg'
     db.session.commit()
     print(testimoni_data.image_file)
-    return redirect(url_for('edit_post',data_id=data_id,form_type='testimoni'))
+    return redirect(url_for('main.edit_post',data_id=data_id,form_type='testimoni'))
 
-@app.route('/formdata/<path:form_type>/<int:data_id>/del_post', methods=['GET', 'POST'])
+@main.route('/formdata/<path:form_type>/<int:data_id>/del_post', methods=['GET', 'POST'])
 @login_required
 def delete_post(data_id, form_type):
     if form_type == 'testimoni':
@@ -198,10 +198,10 @@ def delete_post(data_id, form_type):
     elif form_type == 'job':
         Job.query.filter_by(id=data_id).delete()
         db.session.commit()
-    return redirect(url_for('data'))
+    return redirect(url_for('main.data'))
 
 
-@app.route('/formdata/<path:form_type>/add_entry', methods=['GET', 'POST'])
+@main.route('/formdata/<path:form_type>/add_entry', methods=['GET', 'POST'])
 @login_required
 def add_entry(form_type):
     if form_type == 'testimoni':
@@ -216,7 +216,7 @@ def add_entry(form_type):
                     name=test_form.name.data, desc=test_form.desc.data, testimony=test_form.main.data,author=current_user)
             db.session.add(new_data)
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         return render_template('new_data_test.html', form=test_form, type=form_type, pic=True,title='New Testimoni Data')
     if form_type == 'skill':
         skill_add_form = SkillForm()
@@ -225,7 +225,7 @@ def add_entry(form_type):
                                sk_value=skill_add_form.skills.data,author=current_user)
             db.session.add(skilldata)
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         return render_template('new_data_test.html', form=skill_add_form,type='testimoni',title='New Skill Data')
     if form_type == 'project':
         projectform = ProjectForm()
@@ -238,7 +238,7 @@ def add_entry(form_type):
                                    cred_id=projectform.Credential.data, certi_url=projectform.Certificate.data,author=current_user)
             db.session.add(project_data)
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         return render_template('new_data_test.html', form=projectform,type='testimoni',title='New Project Data')
     if form_type == 'job':
         jobform = JobForm()
@@ -251,15 +251,15 @@ def add_entry(form_type):
                         end=jobform.end.data, place=jobform.place.data, jd=jobform.jd.data,author=current_user)
             db.session.add(newjob)
             db.session.commit()
-            return redirect(url_for('data'))
+            return redirect(url_for('main.data'))
         return render_template('new_data_test.html', form=jobform,type=form_type,title='New Job Data')
 
 
-@app.route('/<path:filename>', methods=['GET'])
+@main.route('/<path:filename>', methods=['GET'])
 def getpdf(filename):
     return send_from_directory(app.static_folder, f'{filename}.pdf')
 
-@app.route('/download/<path:filename>', methods=['GET'])
+@main.route('/download/<path:filename>', methods=['GET'])
 def download(filename):
     path = os.path.join(app.static_folder,'download')
     return send_from_directory(path, filename)
