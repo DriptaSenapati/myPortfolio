@@ -4,7 +4,9 @@ import os
 from PIL import Image
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
+from portfolio import db
 from portfolio.models import Testimonial, User, Job, Project, Skills
+
 
 main = Blueprint('main', __name__)
 
