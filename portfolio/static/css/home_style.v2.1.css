@@ -366,34 +366,7 @@ svg g rect:nth-child(1) {
   border-radius: 1.5em;
 }
 
-.work_experience {
-  display: inline-block;
-  background: #858482;
-  border-radius: 10px;
-  color: white;
-  padding: 30px;
-  border-left: 5px solid rgb(73 118 150);
-  box-shadow: 5px 10px 10px #000000;
-  transition: all 0.5s ease;
-  margin: 50px;
-  position: relative;
-}
 
-.work_experience::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* border-right: 7px solid blue; */
-  border-radius: 10px 30% 30% 10px;
-  content: "";
-  width: 50%;
-  height: 100%;
-  background: rgb(38 53 86);
-  z-index: -1;
-}
-.work_experience:hover {
-  transform: scale(1.02);
-}
 .resume .li-item {
   opacity: 0;
   transition: all 0.9s ease;
@@ -402,27 +375,54 @@ svg g rect:nth-child(1) {
 .li-items h3{
   padding: 30px 30px;
 }
-.experience .work_experience {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.9s cubic-bezier(0, 0.7, 0.7, 0.7);
-}
-.experienceUp .work_experience {
-  transform: translateY(10px);
-  opacity: 1;
-}
 .experience .swiper-container {
   width: 100%;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 200px;
 }
 
 .experience .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 500px !important;
-  height: auto !important;
+  width: 500px;
+  min-height: 400px;
+  background: rgba(255,255,255,0.12);
+  position: relative;
+  border-radius: 20px;
+  padding: 0px 20px;
+  -webkit-box-reflect: below 1px linear-gradient(transparent,transparent,#0006);
+}
 
+.experience .swiper-slide::after{
+  position: absolute;
+  content: attr(data-company);
+  top: 10%;
+  right: 0;
+  height: 10%;
+  width: 80%;
+  background: blueviolet;
+  color: whitesmoke;
+  border-radius: 20px 0px 0px 20px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+}
+.experience .swiper-slide .experience_content{
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+.experience .swiper-slide .experience_content .c_name{
+  color:  rgb(253, 200, 100);
+  font-size: 20px;
+}
+.experience .swiper-slide .experience_content p{
+  color: whitesmoke;
+}
+.experience .swiper-slide .experience_content .JD{
+  padding: 10px 20px;
 }
 .down-resume .li-item {
   opacity: 1;
@@ -661,9 +661,27 @@ svg g rect:nth-child(1) {
   .skills-grid {
     grid-template-columns: 1fr;
   }
-  .work_experience {
+  /* .work_experience {
     width: 95% !important;
     margin: 10px auto !important;
+  } */
+  .experience .swiper-slide{
+    width: 300px;
+  }
+  .experience .swiper-slide::after{
+    font-size: 15px;
+    height: 7%;
+  }
+  .experience .swiper-slide .experience_content .c_name{
+    color:  rgb(253, 200, 100);
+    font-size: 17px;
+  }
+  .experience .swiper-slide .experience_content p{
+    color: whitesmoke;
+    font-size: 13px;
+  }
+  .experience .swiper-slide .experience_content .JD{
+    padding: 5px;
   }
   .event h3 {
     font-size: 19px;

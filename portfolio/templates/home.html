@@ -17,7 +17,7 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/home_style.v2.css')}}"
+      href="{{ url_for('static', filename='css/home_style.v2.1.css')}}"
     />
     <!-- <link
       rel="stylesheet"
@@ -279,19 +279,16 @@
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
                     {% for j in jobs %}
-                      <div class="work_experience swiper-slide">
-                        <h4 class="pname" style="color: rgb(255, 255, 255)">
-                          {{j.role}}
-                        </h4>
-                        <p
-                          style="
-                            color: black;
-                            font-size: 20px;
-                            font-weight: 300;
-                            font-weight: 700 !important;
-                            font-style: italic;
-                            font-family: math;
-                          "
+                      <div class="work_experience swiper-slide" data-company="{{j.role}}">
+                        <!-- <p
+                        style="
+                          color: black;
+                          font-size: 20px;
+                          font-weight: 300;
+                          font-weight: 700 !important;
+                          font-style: italic;
+                          font-family: math;
+                        "
                         >
                           {{j.company}}
                         </p>
@@ -317,7 +314,26 @@
                         >
                           Job Description:
                         </p>
-                        <p style="color: black">{{j.jd}}</p>
+                        <p style="color: black">{{j.jd}}</p> -->
+                        <div class="experience_content">
+                          <p class="c_name">{{j.company}}</p>
+                          {% if not j.end %}
+                            <p>
+                              {{j.start.strftime("%b %Y")}}-present &nbsp
+                              ({{exp[jobs.index(j)]}})
+                            </p>
+                          {% else %}
+                            <p>
+                              {{j.start.strftime("%b %Y")}}-{{j.end.strftime("%b
+                              %Y")}} &nbsp ({{exp[jobs.index(j)]}})
+                            </p>
+                          {% endif %}
+                          <p style="color: rgb(253, 200, 100);">{{j.place}}</p>
+                          <p style="font-size: 15px;color: chocolate;">
+                            Job Description:
+                          </p>
+                          <p class="JD">{{j.jd}}</p>
+                        </div>
                       </div>
                     {% endfor %}
                   </div>
@@ -563,7 +579,7 @@
         coverflowEffect: {
           rotate: 50,
           stretch: 0,
-          depth: 100,
+          depth: 200,
           modifier: 1,
           slideShadows: true,
           updateOnWindowResize: true,
@@ -571,9 +587,6 @@
           observeParents: true,
           freeMode: true,
           watchSlidesProgress: true,
-        },
-        pagination: {
-          el: ".experience .swiper-pagination",
         },
       });
       var swiper_education = new Swiper('.education .swiper-container', {
