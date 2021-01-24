@@ -31,6 +31,10 @@
     />
     <link
       rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/project_timeline.css')}}"
     />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
@@ -48,7 +52,10 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="{{ url_for('main.login')}}" target="_blank"
+        <a
+          class="navbar-brand"
+          href="{{ url_for('main.login')}}"
+          target="_blank"
           ><img
             src="{{ url_for('static', filename='img/logo-modified.png')}}"
             alt=""
@@ -71,18 +78,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Home <span class="sr-only">(current)</span></a
+              <span class="nav-link"
+                >Home <span class="sr-only">(current)</span></span
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link about-link" href="#">About</a>
+              <span class="nav-link about-link">About</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link resume-link" href="#">Resume</a>
+              <span class="nav-link resume-link">Resume</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link project-link" href="#">Accomplishments</a>
+              <span class="nav-link project-link">Accomplishments</span>
             </li>
           </ul>
         </div>
@@ -92,11 +99,10 @@
       <div class="home_name">
         <h1>Dripta <span style="color: #d0a85f">Senapati</span></h1>
         <p>
-          Data Scientist at
-          <a
-            href="http://www.objectsol.in/"
-            style="color: #c58cfb; text-decoration: none"
-            >Objectsol Technologies Pvt. Ltd.</a
+          {{jobs[0].role}} at
+          <span
+            style="color: #c58cfb;"
+            >{{jobs[0].company}}</span
           >
         </p>
         <h1 class="home_animate_heading">
@@ -189,7 +195,7 @@
               </p>
             </div>
             <a
-              href="{{ url_for('main.getpdf', filename='Dripta_Resume')}}"
+              href="{{ url_for('main.getpdf')}}"
               target="_blank"
             >
               <button type="button" class="btn btn-outline-success">
@@ -225,6 +231,11 @@
       </div>
     </section>
     <section class="resume">
+      <div class="scroll_top">
+        <div class="content-arrow">
+          <span>&#8679;</span>
+        </div>
+      </div>
       <span style="font-size: 20px; color: white" class="about_cross"
         >&#10006;</span
       >
@@ -265,84 +276,102 @@
                 <h3 style="text-align: left; color: whitesmoke">
                   Work Experience
                 </h3>
-                {% for j in jobs %}
-                <div class="work_experience">
-                  <h4 class="pname" style="color: rgb(255, 255, 255)">
-                    {{j.role}}
-                  </h4>
-                  <p
-                    style="
-                      color: black;
-                      font-size: 20px;
-                      font-weight: 300;
-                      font-weight: 700 !important;
-                      font-style: italic;
-                      font-family: math;
-                    "
-                  >
-                    {{j.company}}
-                  </p>
-                  {% if not j.end %}
-                      <p>{{j.start.strftime("%b %Y")}}-present &nbsp ({{exp[jobs.index(j)]}})</p>
-                      {% else %}
-                    <p>{{j.start.strftime("%b %Y")}}-{{j.end.strftime("%b %Y")}} &nbsp ({{exp[jobs.index(j)]}})</p>
-                  {% endif %}
-                  <p>{{j.place}}</p>
-                  <p
-                    class="JD"
-                    style="
-                      color: rgb(199, 153, 67);
-                      font-size: 19px;
-                      text-align: left;
-                    "
-                  >
-                    Job Description:
-                  </p>
-                  <p style="color: black">
-                    {{j.jd}}
-                  </p>
+                <div class="swiper-container">
+                  <div class="swiper-wrapper">
+                    {% for j in jobs %}
+                      <div class="work_experience swiper-slide">
+                        <h4 class="pname" style="color: rgb(255, 255, 255)">
+                          {{j.role}}
+                        </h4>
+                        <p
+                          style="
+                            color: black;
+                            font-size: 20px;
+                            font-weight: 300;
+                            font-weight: 700 !important;
+                            font-style: italic;
+                            font-family: math;
+                          "
+                        >
+                          {{j.company}}
+                        </p>
+                        {% if not j.end %}
+                        <p>
+                          {{j.start.strftime("%b %Y")}}-present &nbsp
+                          ({{exp[jobs.index(j)]}})
+                        </p>
+                        {% else %}
+                        <p>
+                          {{j.start.strftime("%b %Y")}}-{{j.end.strftime("%b
+                          %Y")}} &nbsp ({{exp[jobs.index(j)]}})
+                        </p>
+                        {% endif %}
+                        <p>{{j.place}}</p>
+                        <p
+                          class="JD"
+                          style="
+                            color: rgb(199, 153, 67);
+                            font-size: 19px;
+                            text-align: left;
+                          "
+                        >
+                          Job Description:
+                        </p>
+                        <p style="color: black">{{j.jd}}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <!-- Add Pagination -->
+                  <div class="swiper-pagination"></div>
                 </div>
-                {% endfor %}
               </div>
             </li>
             <li id="education">
               <div class="li-items education">
                 <h3 style="text-align: left; color: whitesmoke">Education</h3>
-                <div class="timeline_education" style="color: white">
-                  <ul class="timeline">
-                    <li class="event" data-date="2018-2020">
-                      <h3>Post-graduation</h3>
-                      <p><span>Institute:</span>University of Kalyani</p>
-                      <p><span>Subject:</span>Statistics</p>
-                      <p>
-                        <span>Marks:</span>74% in 2nd Sem and 68% in 1st Sem
-                      </p>
-                    </li>
-                    <li class="event" data-date="2015-2018">
-                      <h3>Under Graduation</h3>
-                      <p><span>Institute:</span>University of Calcutta</p>
-                      <p><span>Subject:</span>Statistics</p>
-                      <p><span>College:</span>Asutosh College</p>
-                      <p><span>Marks:</span>70%</p>
-                    </li>
-                    <li class="event" data-date="2013-2015">
-                      <h3>Higher Secondary</h3>
-                      <p>
-                        <span>Institute:</span>Labanhrad Vidyapith. (Salt Lake
-                        AD)
-                      </p>
-                      <p><span>Subject:</span>Pure Science</p>
-                      <p><span>Marks:</span>87%</p>
-                    </li>
-                    <li class="event" data-date="2013">
-                      <h3>Secondary Education</h3>
-                      <p>
-                        <span>Institute:</span>The Scottish Church Collegiate
-                        School
-                      </p>
-                      <p><span>Marks:</span>83%</p>
-                    </li>
-                  </ul>
+                <div class="swiper-container">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-degree="Post graduate">
+                      <div class="content-details">
+                        <h4 style="color: rgb(253, 200, 100);">Institute</h4>
+                        <p>University of Kalyani</p>
+                        <h5 style="color: rgb(253, 200, 100);">Subject</h5>
+                        <p>Statistics</p>
+                        <h6 style="color: rgb(253, 200, 100);">Marks</h6>
+                        <p>71%</p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" data-degree="Under graduate">
+                      <div class="content-details">
+                        <h4 style="color: rgb(253, 200, 100);">Institute</h4>
+                        <p>University of Calcutta</p>
+                        <h5 style="color: rgb(253, 200, 100);">Subject</h5>
+                        <p>Statistics</p>
+                        <h6 style="color: rgb(253, 200, 100);">Marks</h6>
+                        <p>70%</p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" data-degree="Higer Secondary">
+                      <div class="content-details">
+                        <h4 style="color: rgb(253, 200, 100);">Institute</h4>
+                        <p>Labanhrad Vidyapith. (Salt Lake AD)</p>
+                        <h5 style="color: rgb(253, 200, 100);">Subject</h5>
+                        <p>Science</p>
+                        <h6 style="color: rgb(253, 200, 100);">Marks</h6>
+                        <p>87%</p>
+                      </div>
+                    </div>
+                    <div class="swiper-slide" data-degree="Secondary">
+                      <div class="content-details">
+                        <h4 style="color: rgb(253, 200, 100);">Institute</h4>
+                        <p>The Scottish Church Collegiate School</p>
+                        <h6 style="color: rgb(253, 200, 100);">Marks</h6>
+                        <p>83%</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Add Pagination -->
+                  <div class="swiper-pagination"></div>
                 </div>
               </div>
             </li>
@@ -351,52 +380,67 @@
       </div>
     </section>
     <section class="project">
+      <div class="scroll_top">
+        <div class="content-arrow">
+          <span>&#8679;</span>
+        </div>
+      </div>
       <span style="font-size: 20px; color: white" class="about_cross"
         >&#10006;</span
       >
-      <div class="projectContainer" style="color: wheat">
+      <div class="projectContainer">
         <div class="container">
-          <h2 class="pb-3 pt-2 border-bottom mb-5" style="color: white">
-            List of my
-            <strong
-              ><span style="color: rgb(226, 166, 53)"
-                >&nbsp;Accomplishments</span
-              ></strong
-            >
-          </h2>
-          <div class="timeline_project">
-            {% for p in projects %}
-            <h2 class="timeline__item timeline__item--year">
-              {{projects.index(p) +1}}
-            </h2>
-            <div class="timeline__item">
-              <h3 class="timeline__title">{{p.p_name}}</h3>
+          <h3>Accompl<span style="color: rgb(238, 153, 93)">ishments</span></h3>
+          <div class="ruler_move">
+            <div class="mover"></div>
+          </div>
+          <div class="proj_list">
+            {% for p in projects %} {% if (projects.index(p)+1)%2 == 0 %}
+            <div class="proj right">
+              <h3>{{p.p_name}}</h3>
               {% if p.p_description %}
-              <p class="timeline__blurb">{{p.p_description}}</p>
-              {% endif %} {% if p.p_url %} {% if 'pypi' in p.p_url %}
-              <p>Pypi Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
-              {% else %} {% if 'github' in p.p_url %}
-              <p>GitHub Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
-              {% else %}
-              <p>Link: <a href="{{p.p_url}}">{{p.p_url}}</a></p>
-              {% endif %} {% endif %} {% endif %} {% if p.Organization %}
-              <p>Organization: {{p.Organization}}</p>
-              {% endif %} {% if p.cred_id %}
-              <p>Credential id: {{p.cred_id}}</p>
+              <p>{{ p.p_description }}</p>
+              {% endif %} {% if p.Organization %}
+              <p>Organization: <span>{{ p.Organization }}</span></p>
+              {% endif %} {% if p.p_url %} {% if 'github' in p.p_url %}
+              <p>GitHub Link: <a href="{{ p.p_url }}">{{ p.p_url }}</a></p>
+              {% endif %} {% if 'pypi' in p.p_url %}
+              <p>Pypi Link: <a href="{{ p.p_url }}">{{ p.p_url }}</a></p>
+              {% endif %} {% endif %} {% if p.cred_id %}
+              <p>Credential id:<span>{{ p.cred_id }}</span></p>
               {% endif %} {% if p.certi_url %}
               <p>
-                Credential Url: <a href="{{p.certi_url}}">{{p.certi_url}}</a>
+                Cerificate:<a href="{{ p.certi_url }}">{{ p.certi_url }}</a>
               </p>
               {% endif %}
             </div>
-            {% endfor %}
+            {% endif %} {% if (projects.index(p)+1)%2 != 0 %}
+            <div class="proj left">
+              <h3>{{p.p_name}}</h3>
+              {% if p.p_description %}
+              <p>{{ p.p_description }}</p>
+              {% endif %} {% if p.Organization %}
+              <p>Organization: <span>{{ p.Organization }}</span></p>
+              {% endif %} {% if p.p_url %} {% if 'github' in p.p_url %}
+              <p>GitHub Link: <a href="{{ p.p_url }}">{{ p.p_url }}</a></p>
+              {% endif %} {% if 'pypi' in p.p_url %}
+              <p>Pypi Link: <a href="{{ p.p_url }}">{{ p.p_url }}</a></p>
+              {% endif %} {% endif %} {% if p.cred_id %}
+              <p>Credential id:<span>{{ p.cred_id }}</span></p>
+              {% endif %} {% if p.certi_url %}
+              <p>
+                Cerificate:<a href="{{ p.certi_url }}">{{ p.certi_url }}</a>
+              </p>
+              {% endif %}
+            </div>
+            {% endif %} {% endfor %}
           </div>
         </div>
       </div>
     </section>
     <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
     <script
@@ -411,6 +455,7 @@
     ></script>
     <script src="{{url_for('static', filename='js/particles.js')}}"></script>
     <script src="{{url_for('static', filename='js/app.js')}}"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
       var typed = new Typed("#home_animate", {
         strings: ["Data Scientist", "Statistician", "Developer"],
@@ -430,6 +475,7 @@
       });
       $(".project-link").on("click", function () {
         $(".project").addClass("down-project");
+        $(".down-project .proj_list .proj").addClass("proj_left");
       });
       $(".about_cross").click(function () {
         $(".About").removeClass("down");
@@ -444,27 +490,8 @@
         if ($(".education").hasClass("educationUp")) {
           $(".education").removeClass("educationUp");
         }
+        $(".proj_list .proj").removeClass("proj_left");
       });
-      // var joinDate = new Date("02/03/2020");
-      // var currentDate = new Date();
-      // var Difference_In_Time = currentDate.getTime() - joinDate.getTime();
-      // var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-      // var ex_time = document.querySelector("#ex-number");
-      // var timeList = [];
-      // if (Difference_In_Days >= 365) {
-      //   var year = Math.floor(Difference_In_Days / 365);
-      //   timeList.push(year);
-      //   if (Difference_In_Days % 365 >= 30) {
-      //     var month = Math.floor((Difference_In_Days % 365) / 30);
-      //     timeList.push(month);
-      //   }
-      // } else {
-      //   timeList.push(0);
-      //   var months = Math.floor(Difference_In_Days / 30);
-      //   timeList.push(months);
-      //   console.log(months);
-      // }
-      // ex_time.innerHTML = `(${timeList[0]} years ${timeList[1]} months)`;
       var age = document.querySelector("#age");
       var diff = new Date().getFullYear() - 1997;
       age.innerHTML = diff;
@@ -481,8 +508,8 @@
         var education_loaction = document
           .querySelector(".education")
           .getBoundingClientRect().top;
-        console.log(experience_location);
-        console.log(windowheight);
+        // console.log(experience_location);
+        // console.log(windowheight);
         if ($(".About").hasClass("down")) {
           if (
             $(".testimonial-content").hasClass(".testimonial-contentUp") != true
@@ -528,6 +555,65 @@
       }
       aboutsection.addEventListener("scroll", scrollAppear);
       resumeSection.addEventListener("scroll", scrollAppear);
+      var swiper = new Swiper(".experience .swiper-container", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+          updateOnWindowResize: true,
+          observer: true,
+          observeParents: true,
+          freeMode: true,
+          watchSlidesProgress: true,
+        },
+        pagination: {
+          el: ".experience .swiper-pagination",
+        },
+      });
+      var swiper_education = new Swiper('.education .swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: true,
+        updateOnWindowResize: true,
+        observer: true,
+        observeParents: true,
+        freeMode: true,
+        watchSlidesProgress: true,
+      },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      });
+    </script>
+    <script type="text/javascript">
+      var resume_window = document.querySelector(".resume");
+      var proj_window = document.querySelector(".project");
+      proj_window.addEventListener("scroll", function () {
+        var scroll = document.querySelector(".project .scroll_top");
+        scroll.classList.toggle("activate", $(".project").scrollTop() > 350);
+      });
+      resume_window.addEventListener("scroll", function () {
+        var scroll = document.querySelector(".resume .scroll_top");
+        scroll.classList.toggle("activate", $(".resume").scrollTop() > 350);
+      });
+      $(".scroll_top").click(function () {
+          $(".project").animate({ scrollTop: "0px" }, "slow");
+          $(".resume").animate({ scrollTop: "0px" }, "slow");
+      });
     </script>
   </body>
 </html>

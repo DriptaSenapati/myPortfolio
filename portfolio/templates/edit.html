@@ -11,8 +11,8 @@
     />
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
     <link
@@ -222,59 +222,76 @@
         color: rgb(162 123 94);
         text-shadow: 5px 3px 6px #b9b4b4;
       }
-      @media screen and (max-width: 1000px){
-        h1{
+      .resume_uploader {
+        width: 50%;
+        margin: 30px auto;
+        /* text-align: center; */
+        border: 1px solid grey;
+        border-radius: 10px;
+        box-shadow: 5px 5px 5px rgba(130, 130, 148, 0.966);
+      }
+      .resume_uploader form {
+        margin-bottom: 20px;
+      }
+      .resume_uploader .uploader {
+        margin: 20px;
+      }
+      .resume_uploader .uploader .progress{
+        margin-top: 20px;
+      }
+      @media screen and (max-width: 1000px) {
+        h1 {
           font-size: 31px;
         }
-        .testimoni_container{
+        .testimoni_container {
           width: 90%;
           margin: 15px;
         }
-        .testimoni_container h2{
+        .testimoni_container h2 {
           font-size: 20px;
         }
-        .testimoni_container h3{
+        .testimoni_container h3 {
           font-size: 15px;
         }
-        .testimoni_container h4{
+        .testimoni_container h4 {
           font-size: 13px;
         }
-        .testimoni p{
+        .testimoni p {
           font-size: 10px;
           text-align: left;
         }
-        .testimoni img{
+        .testimoni img {
           width: 64px;
           height: 64px;
         }
-        .skill_container{
+        .skill_container {
           width: 90%;
           margin: 15px;
         }
-        .skill_container h2{
+        .skill_container h2 {
           font-size: 20px;
         }
-        .skill_list_container span{
+        .skill_list_container span {
           font-size: 12px;
         }
-        .project_container{
+        .project_container {
           width: 90%;
           margin: 15px;
         }
-        .project_container p{
+        .project_container p {
           font-size: 10px;
         }
-        .project_container h2{
+        .project_container h2 {
           font-size: 20px;
         }
-        .job_container{
+        .job_container {
           width: 90%;
           margin: 15px;
         }
-        .job_container h2{
+        .job_container h2 {
           font-size: 20px;
         }
-        .job_container p{
+        .job_container p {
           font-size: 10px;
         }
       }
@@ -298,7 +315,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('main.home')}}" target="_blank"
+              <a
+                class="nav-link"
+                href="{{url_for('main.home')}}"
+                target="_blank"
                 >Website</a
               >
             </li>
@@ -370,7 +390,8 @@
         {% for i in skills %}
         <div style="position: relative; height: 50px">
           <span>{{i.sk_name}} <span>: {{i.sk_value}}</span> </span>
-          <a href="{{url_for('main.delete_post',data_id=i.id,form_type='skill')}}"
+          <a
+            href="{{url_for('main.delete_post',data_id=i.id,form_type='skill')}}"
             ><i
               class="fa fa-trash fa-2x"
               aria-hidden="true"
@@ -383,7 +404,8 @@
               "
             ></i
           ></a>
-          <a href="{{url_for('main.edit_post',data_id=i.id ,form_type='skill')}}"
+          <a
+            href="{{url_for('main.edit_post',data_id=i.id ,form_type='skill')}}"
             ><i
               class="fa fa-pencil-square-o fa-2x"
               aria-hidden="true"
@@ -431,14 +453,16 @@
           {% endif %} {% if p.certi_url %}
           <p>Credential Url: <a href="{{p.certi_url}}">{{p.certi_url}}</a></p>
           {% endif %}
-          <a href="{{url_for('main.delete_post',data_id=p.id,form_type='project')}}"
+          <a
+            href="{{url_for('main.delete_post',data_id=p.id,form_type='project')}}"
             ><i
               class="fa fa-trash fa-2x"
               aria-hidden="true"
               id="del_project"
             ></i
           ></a>
-          <a href="{{url_for('main.edit_post',data_id=p.id ,form_type='project')}}"
+          <a
+            href="{{url_for('main.edit_post',data_id=p.id ,form_type='project')}}"
             ><i
               class="fa fa-pencil-square-o fa-2x"
               aria-hidden="true"
@@ -479,7 +503,8 @@
                 href="{{url_for('main.delete_post',data_id=job.id,form_type='job')}}"
                 ><i class="fa fa-trash fa-2x" aria-hidden="true"></i
               ></a>
-              <a href="{{url_for('main.edit_post',data_id=job.id ,form_type='job')}}"
+              <a
+                href="{{url_for('main.edit_post',data_id=job.id ,form_type='job')}}"
                 ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i
               ></a>
             </div>
@@ -488,19 +513,54 @@
         {% endfor %}
       </div>
     </div>
+    <div class="resume_uploader">
+      <h2 style="margin: 15px; text-align: center;">Upload Resume</h2>
+      <hr />
+      <div class="uploader">
+        <form>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" />
+            <label class="custom-file-label" for="customFile"
+              >Choose file</label
+            >
+          </div>
+        </form>
+        <button class="btn btn-primary" id="upload" onclick="upload();">
+          Upload
+        </button>
+        <button class="btn btn-secondary" id="reset_btn" onclick="reset();">
+          Reset
+        </button>
+        <button class="btn btn-primary d-none" id="cancel_btn">
+          Cancel upload
+        </button>
+        <button class="btn btn-primary d-none" id="loading_btn" type="button" disabled>
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Uploading...
+        </button>
+        <button class="btn btn-secondary d-none" id="cancel_btn" type="button">Cancel Upload</button>
+        <div class="progress d-none">
+          <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress_bar">0%</div>
+        </div>
+      </div>
+    </div>
     <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
     <script>
@@ -526,6 +586,75 @@
           $(this).find("span").css({ top: y, left: x });
         });
       });
+    </script>
+    <script>
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      var input = document.getElementById("customFile");
+      function upload(){
+        if (!input.value) {
+          alert("No file is chosen");
+          return;
+        }
+        var data = new FormData();
+        var request = new XMLHttpRequest();
+        request.responseType = "json";
+        input.disabled = true;
+        $("#upload").addClass("d-none");
+        $("#loading_btn").removeClass("d-none");
+        $(".progress").removeClass("d-none");
+        $("#cancel_btn").removeClass("d-none");
+        $("#reset_btn").addClass("d-none");
+        var file = input.files[0];
+        var fileName = file.name;
+        var filesize = file.size;
+
+        document.cookie = `filesize=${filesize}`;
+        data.append("file",file);
+
+        request.upload.addEventListener("progress", function(e){
+          var loaded = e.loaded;
+          var total = e.total;
+          var percentage = (loaded/total)*100;
+          $("#progress_bar").attr("style", `width:${Math.floor(percentage)}%`);
+          $("#progress_bar").text(`${Math.floor(percentage)}`);
+        })
+
+        request.addEventListener("load",function(e){
+          if (request.status == 200) {
+            alert("Resume Upload Done.");
+          }else{
+            alert("Error while uploading file.");
+          }
+          reset();
+        })
+
+        request.open("post","/upload_resume");
+        request.send(data);
+        $("#cancel_btn").click(function(){
+          request.abort();
+          reset();
+        })
+      }
+
+      function reset(){
+        input.value = null;
+        input.disabled = false;
+        $("#cancel_btn").addClass("d-none");
+        $("#upload").removeClass("d-none");
+
+        $(".progress").addClass("d-none");
+
+        $(".progress").addClass("d-none");
+        $("#loading_btn").addClass("d-none");
+
+
+        $(".custom-file-label").text("Choose file");
+        $("#progress_bar").attr("style", "width:0%");
+        $("#reset_btn").removeClass("d-none");
+      }
     </script>
   </body>
 </html>

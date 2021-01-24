@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, redirect, url_for, request, flash,Blueprint
+from flask import Flask, render_template, send_from_directory, redirect, url_for, request, flash,Blueprint,jsonify, current_app
 from portfolio.forms import LoginForm, Testimoni_form, SkillForm, ProjectForm, JobForm,changepictureForm
 import os
 from PIL import Image
@@ -6,9 +6,10 @@ from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
 from portfolio import db
 from portfolio.models import Testimonial, User, Job, Project, Skills
+import uuid
 
 
-main = Blueprint('main', __name__)
+main = Blueprint('main', __name__,static_folder='static', static_url_path='/static/')
 
 
 @main.route('/')
@@ -17,6 +18,7 @@ def home():
     sk_data = Skills.query.all()
     project = Project.query.all() 
     job = Job.query.all()
+    job.reverse()
     exp_list = []
     for j in job:
         if j.end:
@@ -43,6 +45,7 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.data'))
     login = LoginForm()
+    #print(login.hidden_tag())
     if login.validate_on_submit():
         user_data = User.query.filter_by(email=login.email.data).first()
         if user_data and user_data.password == login.password.data:
@@ -50,6 +53,7 @@ def login():
             return redirect(url_for('main.data'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
+    # print(login.errors)
     return render_template('login.html', form=login)
 
 
@@ -75,7 +79,7 @@ def save_picture(form_picture):
     _, f_ext = os.path.splitext(form_picture.filename)
     # picture_fn = random_hex + f_ext
     picture_path = os.path.join(
-        app.root_path, 'static/img', form_picture.filename)
+        main.root_path, 'static/img', form_picture.filename)
 
     output_size = (125, 125)
     i = Image.open(form_picture)
@@ -257,12 +261,22 @@ def add_entry(form_type):
         return render_template('new_data_test.html', form=jobform,type=form_type,title='New Job Data')
 
 
-@main.route('/<path:filename>', methods=['GET'])
-def getpdf(filename):
-    print(main.static_folder)
-    return send_from_directory('static', f'{filename}.pdf')
+@main.route('/download_resume', methods=['GET'])
+def getpdf():
+    # print(main.static_folder)
+    return send_from_directory(f'{main.static_folder}', "Dripta_Resume.pdf")
 
 @main.route('/download/<path:filename>', methods=['GET'])
 def download(filename):
     path = os.path.join("static",'download')
     return send_from_directory(path, filename)
+
+@main.route('/upload_resume', methods=['POST'])
+def upload():
+    file = request.files['file']
+    # name = file.filename
+    # current_app.config["resume_name_hex"] = f"{name.split('.')[0]}{uuid.uuid1().hex}.pdf"
+    save_path = os.path.join(main.static_folder, "Dripta_Resume.pdf")
+    file.save(save_path)
+    return jsonify({"massage": "all ok"})
+    
