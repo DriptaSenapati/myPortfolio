@@ -152,7 +152,7 @@ def edit_post(data_id, form_type):
         if jobform.validate_on_submit():
             jobdata.role=jobform.role.data
             jobdata.company=jobform.company.data
-            jobdata.start=datetime.strptime(jobform.start.data.strftime("%B %Y"),"%B %Y")
+            jobdata.start=datetime.strptime(jobform.start.data.strftime("%d %B %Y"),"%d %B %Y")
             if jobform.end.data == None:
                 jobform.end.data = None
             else:
