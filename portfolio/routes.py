@@ -156,7 +156,7 @@ def edit_post(data_id, form_type):
             if jobform.end.data == None:
                 jobform.end.data = None
             else:
-                jobform.end.data = datetime.strptime(jobform.end.data.strftime("%B %Y"),"%B %Y")
+                jobform.end.data = datetime.strptime(jobform.end.data.strftime("%d %B %Y"),"%d %B %Y")
             jobdata.end = jobform.end.data
             jobdata.place=jobform.place.data
             jobdata.jd=jobform.jd.data
